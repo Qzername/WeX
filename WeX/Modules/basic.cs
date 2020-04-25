@@ -92,6 +92,7 @@ namespace WeX.Modules
                 .WithAuthor(new EmbedAuthorBuilder() { Name = "Uzer", IconUrl = "https://cdn.discordapp.com/attachments/281857417564651521/689474313409396796/1011200ac4bfc854e7330f87340ac69fc1f38fc7_full.png" })
                 .WithDescription("If you want contact with me in order to suggest new commands or troubleshooting here is info:")
                 .AddField("Author: ", "Uzer#9084")
+                .AddField("Special thanks: ", "Blasstah#5656")
                 .AddField("Oficial Discord:", "https://discord.gg/bwPspBJ")
                 .WithFooter("Bot version: 1.0v, API version: 1.0v");
 

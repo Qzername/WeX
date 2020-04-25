@@ -7,7 +7,6 @@ namespace Database
     public class Config
     {
         public string token;
-        public string api;
     }
 
     public class EightBall
@@ -74,5 +73,6 @@ namespace Database
         public double score;
         public int episodes;
         public string rated;
+        public int members;
     }
 }

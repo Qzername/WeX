@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.IO;
 
 namespace Database
@@ -18,6 +19,11 @@ namespace Database
         {
             if (file == JsonFile.config)
                 return JsonConvert.DeserializeObject<Config>(GetFile(file));
+            else if (file == JsonFile.EightBall)
+            {
+                EightBall[] x = JsonConvert.DeserializeObject<EightBall[]>(GetFile(file));
+                return x[id];
+            }
 
             return null;
         }
@@ -34,6 +40,11 @@ namespace Database
                 x.Add(JsonConvert.DeserializeObject<Config>(GetFile(file)));
                 return x.ToArray();
             }
+            else if(file == JsonFile.EightBall)
+            {
+                EightBall[] x = JsonConvert.DeserializeObject<EightBall[]>(GetFile(file));
+                return x;
+            }
 
             return null;
         }
@@ -44,7 +55,7 @@ namespace Database
             string text = string.Empty;
             string path = string.Empty;
 
-            path = file.ToString() + ".json";
+            path = "./Databases/" + file.ToString() + ".json";
 
             if (path != null)
                 using (StreamReader r = new StreamReader(path))
@@ -57,6 +68,6 @@ namespace Database
     public enum JsonFile
     {
         config,
-        cat
+        EightBall
     }
 }

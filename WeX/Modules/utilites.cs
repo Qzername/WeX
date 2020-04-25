@@ -225,7 +225,7 @@ namespace WeX.Modules
             await Context.Channel.SendMessageAsync("", false, embed.Build());
         }
 
-        //MAL API
+        #region MAL
         [Command("mal")]
         public async Task MALUser([Remainder]string User)
         {
@@ -274,13 +274,22 @@ namespace WeX.Modules
 
                 var MAL = new EmbedBuilder();
 
+                string airing;
+
+                if (x.results[0].airing)
+                    airing = "Yes";
+                else
+                    airing = "No";
+
                 MAL.WithTitle(x.results[0].title)
                 .WithThumbnailUrl(x.results[0].image_url)
                 .WithDescription(x.results[0].synopsis)
                 .AddField("Episodes: ", x.results[0].episodes, true)
                 .AddField("Score: ", x.results[0].score, true)
                 .AddField("Type: ", x.results[0].type, true)
-                .AddField("Rating: ", x.results[0].rated);
+                .AddField("Rating: ", x.results[0].rated, true)
+                .AddField("Airing: ", airing, true)
+                .AddField("Members: ", x.results[0].members, true);
 
                 await Context.Channel.SendMessageAsync("", false, MAL.Build());
             }
@@ -289,5 +298,6 @@ namespace WeX.Modules
                 await Context.Channel.SendMessageAsync("Couldn't find any anime with that name!");
             }
         }
+        #endregion 
     }
 }

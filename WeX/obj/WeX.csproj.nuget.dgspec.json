@@ -1,21 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\git\\WeX\\WeX\\WeX.csproj": {}
+    "D:\\Projekty\\Boty\\WeX\\WeX\\WeX.csproj": {}
   },
   "projects": {
-    "D:\\git\\WeX\\WeX\\WeX.csproj": {
+    "D:\\Projekty\\Boty\\WeX\\WeX\\WeX.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\git\\WeX\\WeX\\WeX.csproj",
+        "projectUniqueName": "D:\\Projekty\\Boty\\WeX\\WeX\\WeX.csproj",
         "projectName": "WeX",
-        "projectPath": "D:\\git\\WeX\\WeX\\WeX.csproj",
-        "packagesPath": "C:\\Users\\lukpa\\.nuget\\packages\\",
-        "outputPath": "D:\\git\\WeX\\WeX\\obj\\",
+        "projectPath": "D:\\Projekty\\Boty\\WeX\\WeX\\WeX.csproj",
+        "packagesPath": "C:\\Users\\huber\\.nuget\\packages\\",
+        "outputPath": "D:\\Projekty\\Boty\\WeX\\WeX\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
-          "C:\\Users\\lukpa\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\huber\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -90,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

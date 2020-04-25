@@ -34,11 +34,7 @@ namespace WeX.Modules
         {
             try
             {
-                Config api = (Config)JSONhandler.GetElement(JsonFile.config, 0);
-                HttpClient Http = new HttpClient();
-                var response = await Http.GetStringAsync(api.api + "/api/eightball");
-                string json = response.ToString();
-                EightBall[] final = JsonConvert.DeserializeObject<EightBall[]>(json);
+                EightBall[] final = (EightBall[])JSONhandler.GetElement(JsonFile.EightBall);
 
                 var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(text);
                 string converted = System.Convert.ToBase64String(plainTextBytes);

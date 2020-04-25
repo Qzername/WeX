@@ -70,3 +70,6 @@ D:\git\WeX\WeX\obj\Debug\netcoreapp3.1\WeX.csproj.CopyComplete
 D:\git\WeX\WeX\obj\Debug\netcoreapp3.1\WeX.dll
 D:\git\WeX\WeX\obj\Debug\netcoreapp3.1\WeX.pdb
 D:\git\WeX\WeX\obj\Debug\netcoreapp3.1\WeX.genruntimeconfig.cache
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Databases\config.json
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Databases\EightBall.json
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Databases\ServerConfigs.s3db

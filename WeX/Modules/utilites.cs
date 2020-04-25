@@ -1,5 +1,7 @@
-﻿using Discord;
+﻿using Database;
+using Discord;
 using Discord.Commands;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -225,9 +227,67 @@ namespace WeX.Modules
 
         //MAL API
         [Command("mal")]
-        public async Task MALUser(string User)
+        public async Task MALUser([Remainder]string User)
         {
+            try
+            {
+                HttpClient client = new HttpClient();
+                var json = client.GetStringAsync("https://api.jikan.moe/v3/user/" + User);
+                MALUser x = JsonConvert.DeserializeObject<MALUser>(json.Result);
 
+                var MAL = new EmbedBuilder();
+
+                EmbedFieldBuilder watched = new EmbedFieldBuilder();
+                watched.IsInline = true;
+                watched.Name = "Days Watched: ";
+                watched.Value = x.anime_stats.days_watched;
+
+                EmbedFieldBuilder total = new EmbedFieldBuilder();
+                total.IsInline = false;
+                total.Name = "Total Entries: ";
+                total.Value = x.anime_stats.total_entries;
+
+                MAL.WithTitle(x.username)
+                .WithThumbnailUrl(x.image_url)
+                .AddField(watched)
+                .AddField(total)
+                .AddField("Completed:", x.anime_stats.completed, true)
+                .AddField("Watching:", x.anime_stats.watching, true)
+                .AddField("Dropped:", x.anime_stats.dropped, true);
+
+                await Context.Channel.SendMessageAsync("", false, MAL.Build());
+            }
+            catch(Exception)
+            {
+                await Context.Channel.SendMessageAsync("Couldn't find any user with that nickname!");
+            }
+        }
+
+        [Command("anime")]
+        public async Task Anime([Remainder]string Anime)
+        {
+            try
+            {
+                HttpClient client = new HttpClient();
+                var json = client.GetStringAsync("https://api.jikan.moe/v3/search/anime?q=" + Anime + "&page=1");
+                Anime x = JsonConvert.DeserializeObject<Anime>(json.Result);
+
+                var MAL = new EmbedBuilder();
+
+                MAL.WithTitle(x.results[0].title)
+                .WithThumbnailUrl(x.results[0].image_url)
+                .WithDescription(x.results[0].synopsis)
+                .AddField("Episodes: ", x.results[0].episodes, true)
+                .AddField("Score: ", x.results[0].score, true)
+                .AddField("Type: ", x.results[0].type, true)
+                .AddField("Rating: ", x.results[0].rated);
+
+                await Context.Channel.SendMessageAsync("", false, MAL.Build());
+            }
+            catch (Exception)
+            {
+                await Context.Channel.SendMessageAsync("Couldn't find any anime with that name!");
+            }
         }
     }
 }

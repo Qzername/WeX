@@ -58,6 +58,8 @@ namespace WeX.Modules
             .AddField("avg", "I will get average of numbers you write me down and show result")
             .AddField("avatar", "Mention a user and I will get that user avatar URL!")
             .AddField("idinfo", "Sends serverID, channelID and userID")
+            .AddField("mal", "Searches for user by nickname on MyAnimeList")
+            .AddField("anime", "Searches for anime by its name")
             .WithFooter(footer => footer.Text = "use 'wex ' before any command!")
             .WithColor(Color.Blue);
 

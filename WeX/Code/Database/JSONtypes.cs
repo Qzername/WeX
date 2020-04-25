@@ -42,7 +42,7 @@ namespace Database
         public string image;
     }
 
-    public class MALUSer
+    public class MALUser
     {
         public string username;
         public string image_url;
@@ -57,5 +57,22 @@ namespace Database
         public int completed;
         public int dropped;
         public int total_entries;
+    }
+
+    public class Anime
+    {
+        public AnimeResults[] results;
+    }
+
+    public class AnimeResults
+    {
+        public string image_url;
+        public string title;
+        public bool airing;
+        public string synopsis;
+        public string type;
+        public double score;
+        public int episodes;
+        public string rated;
     }
 }

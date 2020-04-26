@@ -27,6 +27,7 @@ namespace WeX
             _client.Ready += ReadyAsync;
             _client.MessageReceived += MessageReceivedAsync;
             _client.UserJoined += AnnounceJoinedUser;
+            _client.UserLeft += AnnounceLeftUser;
         }
 
         public async Task MainAsync()
@@ -71,6 +72,23 @@ namespace WeX
                 return;
 
             Messages mess = SQLiteHandler.GetMessage(user.Guild.Id, true);
+
+            if (mess.ismessagesonline == "false")
+                return;
+
+            SocketTextChannel x = user.Guild.GetChannel(mess.channelid) as SocketTextChannel;
+            string final = mess.text;
+            final = final.Replace("[user]", "<@" + user.Id + ">");
+            final = final.Replace("[server]", user.Guild.ToString());
+            await x.SendMessageAsync(final);
+        }
+
+        public async Task AnnounceLeftUser(SocketGuildUser user)
+        {
+            if (SQLiteHandler.NoServer(user.Guild.Id))
+                return;
+
+            Messages mess = SQLiteHandler.GetMessage(user.Guild.Id, false);
 
             if (mess.ismessagesonline == "false")
                 return;

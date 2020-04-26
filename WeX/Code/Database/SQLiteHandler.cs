@@ -49,6 +49,13 @@ namespace Database
             cmd.Parameters.AddWithValue("@no", "Welcome to [server], [user]");
             cmd.Prepare();
             cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT INTO ByeMessages(id, ismessageonline, text, channelid) VALUES(@id, @yes, @no, 0);";
+            cmd.Parameters.AddWithValue("@id", serverid);
+            cmd.Parameters.AddWithValue("@yes", "false");
+            cmd.Parameters.AddWithValue("@no", "[user] has left from [server]");
+            cmd.Prepare();
+            cmd.ExecuteNonQuery();
         }
 
         public static Messages GetMessage(ulong serverid, bool isWelcome)
@@ -61,7 +68,12 @@ namespace Database
             using var con = new SQLiteConnection(path);
             con.Open();
 
-            string stm = "SELECT * FROM WelcomeMessages WHERE id=" + serverid;
+            string stm;
+
+            if(isWelcome)
+                stm = "SELECT * FROM WelcomeMessages WHERE id=" + serverid;
+            else
+                stm = "SELECT * FROM ByeMessages WHERE id=" + serverid;
 
             using var cmd = new SQLiteCommand(stm, con);
             using SQLiteDataReader rdr = cmd.ExecuteReader();
@@ -81,7 +93,10 @@ namespace Database
             using var con = new SQLiteConnection(path);
             con.Open();
             using var cmd = new SQLiteCommand(con);
-            cmd.CommandText = "UPDATE WelcomeMessages SET text = @text, ismessageonline = @message, channelid = @id;";
+            if (isWelcome)
+                cmd.CommandText = "UPDATE WelcomeMessages SET text = @text, ismessageonline = @message, channelid = @id;";
+            else
+                cmd.CommandText = "UPDATE ByeMessages SET text = @text, ismessageonline = @message, channelid = @id;";
             cmd.Parameters.AddWithValue("@id", mess.channelid);
             cmd.Parameters.AddWithValue("@message", mess.ismessagesonline);
             cmd.Parameters.AddWithValue("@text", mess.text);

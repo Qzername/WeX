@@ -25,7 +25,6 @@ D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
-D:\Projekty\Boty\WeX\WeX\obj\Debug\netcoreapp3.1\WeX.csproj.CoreCompileInputs.cache
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\background.png
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\Computer.png
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\backgroundtoilet.png
@@ -72,4 +71,9 @@ D:\git\WeX\WeX\obj\Debug\netcoreapp3.1\WeX.pdb
 D:\git\WeX\WeX\obj\Debug\netcoreapp3.1\WeX.genruntimeconfig.cache
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Databases\config.json
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Databases\EightBall.json
-D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Databases\ServerConfigs.s3db
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\System.Data.SQLite.dll
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\runtimes\linux-x64\native\netstandard2.0\SQLite.Interop.dll
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\runtimes\osx-x64\native\netstandard2.0\SQLite.Interop.dll
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\netstandard2.0\SQLite.Interop.dll
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\netstandard2.0\SQLite.Interop.dll
+D:\Projekty\Boty\WeX\WeX\obj\Debug\netcoreapp3.1\WeX.csproj.CoreCompileInputs.cache

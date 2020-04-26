@@ -26,6 +26,7 @@ namespace WeX
             _client.Log += LogAsync;
             _client.Ready += ReadyAsync;
             _client.MessageReceived += MessageReceivedAsync;
+            _client.UserJoined += AnnounceJoinedUser;
         }
 
         public async Task MainAsync()
@@ -58,9 +59,27 @@ namespace WeX
 
             if (message.Content == "wex sex")
                 await message.Channel.SendMessageAsync("That's not funny");
-            else if(message.Content == "wex cringe")
+            else if (message.Content == "wex cringe")
                 await message.Channel.SendMessageAsync("no u");
+            else if (message.Content == "wex welcomemessages")
+                await message.Channel.SendMessageAsync("You made mistake, It's wex welcomemessage not wex welcomemessages");
         }
 
+        public async Task AnnounceJoinedUser(SocketGuildUser user) 
+        {
+            if (SQLiteHandler.NoServer(user.Guild.Id))
+                return;
+
+            Messages mess = SQLiteHandler.GetMessage(user.Guild.Id, true);
+
+            if (mess.ismessagesonline == "false")
+                return;
+
+            SocketTextChannel x = user.Guild.GetChannel(mess.channelid) as SocketTextChannel;
+            string final = mess.text;
+            final = final.Replace("[user]", "<@" + user.Id + ">");
+            final = final.Replace("[server]", user.Guild.ToString());
+            await x.SendMessageAsync(final);
+        }
     }
 }

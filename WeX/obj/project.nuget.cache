@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "cwdkgiMv0iBjQlt3Qv49ZFQi9qsjDQaAkGZ7FsSCUUuDgbjb3C9XPhcYwoEhLd+/pncsmwM7sVhYrDlPHY1wmw==",
+  "dgSpecHash": "B0ieA/m9ENRs40sIIEBS30iLz3JsSSmzgOs9jCrB4SPvCy6C+xHLU5/zFvoe6fQgCiM9x4NnAmY5KTAQB3SQKw==",
   "success": true,
   "projectFilePath": "D:\\Projekty\\Boty\\WeX\\WeX\\WeX.csproj",
   "expectedPackageFiles": [
@@ -17,6 +17,8 @@
     "C:\\Users\\huber\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\huber\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
     "C:\\Users\\huber\\.nuget\\packages\\system.collections.immutable\\1.3.1\\system.collections.immutable.1.3.1.nupkg.sha512",
+    "C:\\Users\\huber\\.nuget\\packages\\system.data.sqlite\\1.0.112\\system.data.sqlite.1.0.112.nupkg.sha512",
+    "C:\\Users\\huber\\.nuget\\packages\\system.data.sqlite.core\\1.0.112\\system.data.sqlite.core.1.0.112.nupkg.sha512",
     "C:\\Users\\huber\\.nuget\\packages\\system.diagnostics.debug\\4.3.0\\system.diagnostics.debug.4.3.0.nupkg.sha512",
     "C:\\Users\\huber\\.nuget\\packages\\system.drawing.common\\4.7.0\\system.drawing.common.4.7.0.nupkg.sha512",
     "C:\\Users\\huber\\.nuget\\packages\\system.globalization\\4.3.0\\system.globalization.4.3.0.nupkg.sha512",

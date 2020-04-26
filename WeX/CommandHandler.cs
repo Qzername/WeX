@@ -37,7 +37,7 @@ namespace WeX
                     if(result.Error == CommandError.BadArgCount)
                         await context.Channel.SendMessageAsync("You wrote too much or too less arguments!");
                     else if(result.Error == CommandError.UnmetPrecondition)
-                        await context.Channel.SendMessageAsync("You do not have permission to be able to do this command");
+                        await context.Channel.SendMessageAsync("You (or I) do not have permission to be able to do this command");
                     else if(result.Error == CommandError.ObjectNotFound)
                         await context.Channel.SendMessageAsync("User not found");
                     else

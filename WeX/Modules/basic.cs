@@ -67,6 +67,7 @@ namespace WeX.Modules
             .AddField("clear", "Clears the amount you give messages")
             .AddField("kick", "Kick an user")
             .AddField("ban", "Bans an user and deletes all user messages written in this week")
+            .AddField("welcomemessage", "Set message that will apear on user join")
             .WithFooter(footer => footer.Text = "use 'wex ' before any command!")
             .WithColor(Color.Blue);
 

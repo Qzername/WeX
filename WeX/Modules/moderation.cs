@@ -1,7 +1,10 @@
-﻿using Discord;
+﻿using Database;
+using Discord;
 using Discord.Commands;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -57,5 +60,115 @@ namespace WeX.Modules
             await m.DeleteAsync();
         }
 
+        [RequireUserPermission(ChannelPermission.ManageMessages)]
+        [Command("welcomemessage")]
+        public async Task WelcomeMessage()
+        {
+            if (SQLiteHandler.NoServer(Context.Guild.Id))
+                SQLiteHandler.NewServer(Context.Guild.Id);
+
+            Messages welcome = SQLiteHandler.GetMessage(Context.Guild.Id, true);
+
+            var embed = new EmbedBuilder();
+
+            string noyes;
+            if (welcome.ismessagesonline == "true")
+                noyes = "Yes";
+            else
+                noyes = "No";
+
+            string channel;
+            if (welcome.channelid == 0)
+                channel = "No channel";
+            else
+                channel = "<#" + welcome.channelid.ToString() + ">";
+
+
+            embed.WithTitle("Welcome messages")
+                .AddField("­­ ", "Special Commands:")
+                .AddField("Set on/off", "welcomemessage [on/off]", true)
+                .AddField("Set welcome channel", "welcomechannel", true)
+                .AddField("Set welcome message", "welcometext", true)
+                .AddField("­­ ", "Status:")
+                .AddField("Is welcome message online?", noyes, true)
+                .AddField("Welcome channel", channel, true)
+                .AddField("Welcome text", welcome.text, true)
+                .WithColor(Color.Green);
+
+            await Context.Channel.SendMessageAsync("", false, embed.Build());
+        }
+
+        [RequireUserPermission(ChannelPermission.ManageMessages)]
+        [Command("welcometext")]
+        public async Task Welcometext([Remainder]string text)
+        {
+            if (SQLiteHandler.NoServer(Context.Guild.Id))
+                SQLiteHandler.NewServer(Context.Guild.Id);
+
+            Messages mess = SQLiteHandler.GetMessage(Context.Channel.Id, true);
+            mess.text = text;
+            SQLiteHandler.Update(mess, true, Context.Channel.Id);
+
+            await Context.Channel.SendMessageAsync("New welcome text has been set");
+        }
+
+        [RequireUserPermission(ChannelPermission.ManageMessages)]
+        [Command("welcomechannel")]
+        public async Task Welcomechannel(IGuildChannel channel)
+        {
+            if (SQLiteHandler.NoServer(Context.Guild.Id))
+                SQLiteHandler.NewServer(Context.Guild.Id);
+
+            try
+            {
+                Context.Guild.GetChannel(channel.Id);
+            }
+            catch(Exception)
+            {
+                await Context.Channel.SendMessageAsync("Channel doesn't exist");
+                return;
+            }
+
+            Messages mess = SQLiteHandler.GetMessage(Context.Channel.Id, true);
+            mess.channelid = channel.Id;
+            SQLiteHandler.Update(mess, true, Context.Channel.Id);
+
+            await Context.Channel.SendMessageAsync("New welcome text has been set");
+        }
+
+        [RequireUserPermission(ChannelPermission.ManageMessages)]
+        [Command("welcomemessage")]
+        public async Task Welcomemessage(string status)
+        {
+            if (SQLiteHandler.NoServer(Context.Guild.Id))
+                SQLiteHandler.NewServer(Context.Guild.Id);
+
+            Messages mess;
+            mess = SQLiteHandler.GetMessage(Context.Guild.Id, true);
+
+            if(mess.channelid == 0)
+            {
+                await Context.Channel.SendMessageAsync("Please, set Welcome Channel firstly by using welcomechannel command");
+                return;
+            }
+
+            if(status.ToLower() == "on")
+            {
+                await Context.Channel.SendMessageAsync("Welcome Messages changed to ON");
+                mess.ismessagesonline = "true";
+            }
+            else if(status.ToLower() == "off")
+            {
+                await Context.Channel.SendMessageAsync("Welcome Messages changed to OFF");
+                mess.ismessagesonline = "false";
+            }
+            else
+            {
+                await Context.Channel.SendMessageAsync("Invalid entry.");
+                return;
+            }
+
+            SQLiteHandler.Update(mess, true, Context.Guild.Id);
+        }
     }  
 }

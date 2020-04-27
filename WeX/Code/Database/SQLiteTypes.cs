@@ -11,4 +11,10 @@ namespace Database
         public string text;
         public ulong channelid;
     }
+
+    public class MainConfig
+    {
+        public ulong serverid;
+        public ulong muteroleid;
+    }
 }

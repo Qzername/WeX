@@ -1,11 +1,15 @@
 ﻿using Database;
 using Discord;
 using Discord.Commands;
+using Discord.WebSocket;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace WeX.Modules
@@ -91,7 +95,7 @@ namespace WeX.Modules
                 .AddField("Set welcome channel", "welcomechannel", true)
                 .AddField("Set welcome message", "welcometext", true)
                 .AddField("­­ ", "Status:")
-                .AddField("Is welcome message online?", noyes, true)
+                .AddField("Is welcome message active?", noyes, true)
                 .AddField("Welcome channel", channel, true)
                 .AddField("Welcome text", welcome.text, true)
                 .WithColor(Color.Green);
@@ -147,12 +151,6 @@ namespace WeX.Modules
             Messages mess;
             mess = SQLiteHandler.GetMessage(Context.Guild.Id, true);
 
-            if(mess.channelid == 0)
-            {
-                await Context.Channel.SendMessageAsync("Please, set Welcome Channel firstly by using welcomechannel command");
-                return;
-            }
-
             if(status.ToLower() == "on")
             {
                 await Context.Channel.SendMessageAsync("Welcome Messages changed to ON");
@@ -165,7 +163,13 @@ namespace WeX.Modules
             }
             else
             {
-                await Context.Channel.SendMessageAsync("Invalid entry.");
+                await Context.Channel.SendMessageAsync("Invalid entry. Maybe you should try write only 'wex welcomemessage'?");
+                return;
+            }
+
+            if (mess.channelid == 0)
+            {
+                await Context.Channel.SendMessageAsync("Please, set Welcome Channel firstly by using welcomechannel command");
                 return;
             }
 
@@ -204,7 +208,7 @@ namespace WeX.Modules
                 .AddField("Set bye channel", "welcomechannel", true)
                 .AddField("Set bye message", "welcometext", true)
                 .AddField("­­ ", "Status:")
-                .AddField("Is bye message online?", noyes, true)
+                .AddField("Is bye message active?", noyes, true)
                 .AddField("Bye channel", channel, true)
                 .AddField("Bye text", welcome.text, true)
                 .WithColor(Color.Green);
@@ -278,11 +282,91 @@ namespace WeX.Modules
             }
             else
             {
-                await Context.Channel.SendMessageAsync("Invalid entry.");
+                await Context.Channel.SendMessageAsync("Invalid entry. Maybe you should try write only 'wex byemessage'?");
                 return;
             }
 
             SQLiteHandler.Update(mess, false, Context.Guild.Id);
+        }
+        #endregion
+
+        #region Mute
+        [Command("mute")]
+        [RequireUserPermission(ChannelPermission.ManageRoles)]
+        [RequireBotPermission(ChannelPermission.ManageRoles)]
+        public async Task Mute(IGuildUser user)
+        {
+            if (SQLiteHandler.NoServer(Context.Guild.Id))
+                SQLiteHandler.NewServer(Context.Guild.Id);
+
+            MainConfig main = SQLiteHandler.GetMessage(Context.Guild.Id);
+
+            if(main.muteroleid == 0)
+            {
+                await Context.Channel.SendMessageAsync("You have to set firstly muterole by using 'wex setmute'");
+                return;
+            }
+
+            SocketRole role;
+
+            try
+            {
+                role = Context.Guild.GetRole(main.muteroleid);
+                await user.AddRoleAsync(role);
+            }
+            catch(Exception)
+            {
+                await Context.Channel.SendMessageAsync("Something went wrong. Posibly I don't have permision to give that role.");
+                return;
+            }
+            await Context.Channel.SendMessageAsync("Done.");
+        }
+
+        [Command("unmute")]
+        [RequireUserPermission(ChannelPermission.ManageRoles)]
+        [RequireBotPermission(ChannelPermission.ManageRoles)]
+        public async Task UnMute(IGuildUser user)
+        {
+            if (SQLiteHandler.NoServer(Context.Guild.Id))
+                SQLiteHandler.NewServer(Context.Guild.Id);
+
+            MainConfig main = SQLiteHandler.GetMessage(Context.Guild.Id);
+
+            if (main.muteroleid == 0)
+            {
+                await Context.Channel.SendMessageAsync("You have to set firstly muterole by using 'wex setmute'");
+                return;
+            }
+
+            SocketRole role;
+
+            try
+            {
+                role = Context.Guild.GetRole(main.muteroleid);
+                await user.RemoveRoleAsync(role);
+            }
+            catch (Exception)
+            {
+                await Context.Channel.SendMessageAsync("Something went wrong. Posibly I don't have permision to take that role.");
+                return;
+            }
+            await Context.Channel.SendMessageAsync("Done.");
+        }
+
+
+        [Command("setmute")]
+        [RequireUserPermission(ChannelPermission.ManageRoles)]
+        [RequireBotPermission(ChannelPermission.ManageRoles)]
+        public async Task SetMute(IRole role)
+        {
+            if (SQLiteHandler.NoServer(Context.Guild.Id))
+                SQLiteHandler.NewServer(Context.Guild.Id);
+
+            MainConfig config = SQLiteHandler.GetMessage(Context.Guild.Id);
+            config.muteroleid = role.Id;
+            SQLiteHandler.Update(config);
+
+            await Context.Channel.SendMessageAsync("New role has been set.");
         }
         #endregion
     }

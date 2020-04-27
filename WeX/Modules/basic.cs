@@ -69,6 +69,9 @@ namespace WeX.Modules
             .AddField("ban", "Bans an user and deletes all user messages written in this week")
             .AddField("welcomemessage", "Set message that will apear when user join server")
             .AddField("byemessage", "Set message that will apear when user left server")
+            .AddField("mute", "Mute user")
+            .AddField("unmute", "Unmute user")
+            .AddField("setmute", "Set mute role")
             .WithFooter(footer => footer.Text = "use 'wex ' before any command!")
             .WithColor(Color.Blue);
 
@@ -96,7 +99,7 @@ namespace WeX.Modules
                 .AddField("Author: ", "Uzer#9084")
                 .AddField("Special thanks: ", "Blasstah#5656")
                 .AddField("Oficial Discord:", "https://discord.gg/bwPspBJ")
-                .WithFooter("Bot version: 1.0v, API version: 1.0v");
+                .WithFooter("Bot version: 0.1v");
 
             await Context.Channel.SendMessageAsync("", false, bud.Build());
         }

@@ -56,6 +56,11 @@ namespace Database
             cmd.Parameters.AddWithValue("@no", "[user] has left from [server]");
             cmd.Prepare();
             cmd.ExecuteNonQuery();
+
+            cmd.CommandText = "INSERT INTO mainconfig(serverid, muteroleid) VALUES(@id, 0);";
+            cmd.Parameters.AddWithValue("@id", serverid);
+            cmd.Prepare();
+            cmd.ExecuteNonQuery();
         }
 
         public static Messages GetMessage(ulong serverid, bool isWelcome)
@@ -88,6 +93,28 @@ namespace Database
             return mess;
         }
 
+        public static MainConfig GetMessage(ulong serverid)
+        {
+            MainConfig mess = new MainConfig();
+
+            using var con = new SQLiteConnection(path);
+            con.Open();
+
+            string stm;
+
+            stm = "SELECT * FROM mainconfig WHERE serverid=" + serverid;
+
+            using var cmd = new SQLiteCommand(stm, con);
+            using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+            while (rdr.Read())
+            {
+                mess.serverid = Convert.ToUInt64(rdr.GetInt64(0));
+                mess.muteroleid = Convert.ToUInt64(rdr.GetInt64(1));
+            }
+            return mess;
+        }
+
         public static void Update(Messages mess, bool isWelcome, ulong id)
         {
             using var con = new SQLiteConnection(path);
@@ -100,6 +127,18 @@ namespace Database
             cmd.Parameters.AddWithValue("@id", mess.channelid);
             cmd.Parameters.AddWithValue("@message", mess.ismessagesonline);
             cmd.Parameters.AddWithValue("@text", mess.text);
+            cmd.Prepare();
+            cmd.ExecuteNonQuery();
+        }
+
+        public static void Update(MainConfig mess)
+        {
+            using var con = new SQLiteConnection(path);
+            con.Open();
+            using var cmd = new SQLiteCommand(con);
+            cmd.CommandText = "UPDATE mainconfig SET serverid = @id, muteroleid = @muteroleid";
+            cmd.Parameters.AddWithValue("@id", mess.serverid);
+            cmd.Parameters.AddWithValue("@muteroleid", mess.muteroleid);
             cmd.Prepare();
             cmd.ExecuteNonQuery();
         }

@@ -663,32 +663,11 @@ namespace WeX.Modules
 
             EmbedBuilder build = new EmbedBuilder();
             Random rand = new Random();
-            int choose = rand.Next(1, 6);
+            int choose = rand.Next(1, final.Length);
 
-            switch(choose)
-            {
-                case 1:
-                    build.WithTitle(Context.User.ToString() + " is slaping " + user.ToString() + "!")
-                        .WithImageUrl(final[0].link);
-                    break;
-                case 2:
-                    build.WithTitle(Context.User.ToString() + " is slaping " + user.ToString() + "!")
-                        .WithImageUrl(final[1].link);
-                    break;
-                case 3:
-                    build.WithTitle(Context.User.ToString() + " is slaping " + user.ToString() + "!")
-                        .WithImageUrl(final[2].link);
-                    break;
-                case 4:
-                    build.WithTitle(Context.User.ToString() + " is slaping " + user.ToString() + "!")
-                        .WithImageUrl(final[3].link);
-                    break;
-                case 5:
-                    build.WithTitle(Context.User.ToString() + " is slaping " + user.ToString() + "!")
-                        .WithImageUrl(final[4].link);
-                    break;
-            }
-            
+            build.WithTitle(Context.User.ToString() + " is slaping " + user.ToString() + "!")
+                        .WithImageUrl(final[choose].link);
+
             await Context.Channel.SendMessageAsync("", false, build.Build());
         }
 
@@ -730,31 +709,10 @@ namespace WeX.Modules
 
             EmbedBuilder build = new EmbedBuilder();
             Random rand = new Random();
-            int choose = rand.Next(1, 6);
+            int choose = rand.Next(1, final.Length);
 
-            switch (choose)
-            {
-                case 1:
-                    build.WithTitle(Context.User.ToString() + " is kissing " + user.ToString() + "!")
-                        .WithImageUrl(final[0].link);
-                    break;
-                case 2:
-                    build.WithTitle(Context.User.ToString() + " is kissing " + user.ToString() + "!")
-                        .WithImageUrl(final[1].link);
-                    break;
-                case 3:
-                    build.WithTitle(Context.User.ToString() + " is kissing " + user.ToString() + "!")
-                        .WithImageUrl(final[2].link);
-                    break;
-                case 4:
-                    build.WithTitle(Context.User.ToString() + " is kissing " + user.ToString() + "!")
-                        .WithImageUrl(final[3].link);
-                    break;
-                case 5:
-                    build.WithTitle(Context.User.ToString() + " is kissing " + user.ToString() + "!")
-                        .WithImageUrl(final[4].link);
-                    break;
-            }
+            build.WithTitle(Context.User.ToString() + " is slaping " + user.ToString() + "!")
+                         .WithImageUrl(final[choose].link);
 
             await Context.Channel.SendMessageAsync("", false, build.Build());
         }

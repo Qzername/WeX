@@ -25,9 +25,7 @@ D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
-D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\background.png
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\Computer.png
-D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\backgroundtoilet.png
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\toilet.png
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\lovemeter.png
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\drake.png
@@ -77,3 +75,14 @@ D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\runtimes\osx-x64\native\netstan
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\netstandard2.0\SQLite.Interop.dll
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\netstandard2.0\SQLite.Interop.dll
 D:\Projekty\Boty\WeX\WeX\obj\Debug\netcoreapp3.1\WeX.csproj.CoreCompileInputs.cache
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\computerbackground.png
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\joker.png
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\jokerbackground.png
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\keanu.png
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\keanubackground.png
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\tbc.png
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\washer.png
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\washerbackground.png
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\tbcbackground.png
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Databases\slap.json
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Databases\kiss.json

@@ -45,6 +45,11 @@ namespace Database
                 EightBall[] x = JsonConvert.DeserializeObject<EightBall[]>(GetFile(file));
                 return x;
             }
+            else if(file == JsonFile.slap || file == JsonFile.kiss)
+            {
+                Bird[] x = JsonConvert.DeserializeObject<Bird[]>(GetFile(file));
+                return x;
+            }
 
             return null;
         }
@@ -68,6 +73,8 @@ namespace Database
     public enum JsonFile
     {
         config,
-        EightBall
+        EightBall,
+        slap,
+        kiss
     }
 }

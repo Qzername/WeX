@@ -75,4 +75,16 @@ namespace Database
         public string rated;
         public int members;
     }
+
+    public class Meme
+    {
+        public int id;
+        public string image;
+        public string caption;
+    }
+
+    public class Fact
+    {
+        public string fact;
+    }
 }

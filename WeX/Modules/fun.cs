@@ -11,6 +11,9 @@ using Photos;
 using ImageProcessor;
 using System.Drawing;
 using Newtonsoft.Json.Linq;
+using System.Runtime.CompilerServices;
+using System.Xml.Schema;
+using Discord.Rest;
 
 namespace WeX.Modules
 {
@@ -59,7 +62,7 @@ namespace WeX.Modules
             try
             {
                 System.Drawing.Image img = HTTPrequest.RequestImage(user.GetAvatarUrl());
-                PhotoCommands.Computer(img);
+                PhotoCommands.Picture("computer",img, new Size(235, 235), new Point(325, 20));
                 await Context.Channel.SendFileAsync("./Images/final.png");
             }
             catch(Exception)
@@ -114,7 +117,7 @@ namespace WeX.Modules
             }
     
             var y = new EmbedBuilder();
-            y.WithDescription(user.ToString() + ", you got a hug from " + Context.User.ToString() + "!")
+            y.WithTitle(user.ToString() + ", you got a hug from " + Context.User.ToString() + "!")
             .WithImageUrl(x.link);
 
             await Context.Channel.SendMessageAsync("", false, y.Build());
@@ -182,7 +185,7 @@ namespace WeX.Modules
             try
             {
                 System.Drawing.Image img = HTTPrequest.RequestImage(user.GetAvatarUrl());
-                PhotoCommands.Toilet(img);
+                PhotoCommands.Picture("toilet", img, new Size(50, 50), new Point(120, 65));
                 await Context.Channel.SendFileAsync("./Images/final.png");
             }
             catch (Exception)
@@ -355,7 +358,7 @@ namespace WeX.Modules
             try
             {
                 System.Drawing.Image img = HTTPrequest.RequestImage(user.GetAvatarUrl());
-                PhotoCommands.Pickle(img);
+                PhotoCommands.Picture("pickle", img, new Size(250, 250), new Point(404, 142));
                 await Context.Channel.SendFileAsync("./Images/final.png");
             }
             catch (Exception)
@@ -374,6 +377,386 @@ namespace WeX.Modules
             System.Drawing.Image img = HTTPrequest.RequestImage(x.image);
             img.Save("./Images/final.png");
             await Context.Channel.SendFileAsync("./Images/final.png");
+        }
+
+        [Command("joker")] 
+        public async Task Joker(IGuildUser user)
+        {
+            try
+            {
+                System.Drawing.Image img = HTTPrequest.RequestImage(user.GetAvatarUrl());
+                PhotoCommands.Picture("joker", img, new Size(200, 200), new Point(120, 30));
+                await Context.Channel.SendFileAsync("./Images/final.png");
+            }
+            catch (Exception)
+            {
+                await Context.Channel.SendMessageAsync("Avatar not found.");
+            }
+        }
+
+        [Command("keanu")]
+        public async Task Keanu(IGuildUser user)
+        {
+            try
+            {
+                System.Drawing.Image img = HTTPrequest.RequestImage(user.GetAvatarUrl());
+                PhotoCommands.Picture("keanu", img, new Size(100, 100), new Point(150, 20));
+                await Context.Channel.SendFileAsync("./Images/final.png");
+            }
+            catch (Exception)
+            {
+                await Context.Channel.SendMessageAsync("Avatar not found.");
+            }
+        }
+
+        [Command("washer")]
+        public async Task Washer(IGuildUser user)
+        {
+            try
+            {
+                System.Drawing.Image img = HTTPrequest.RequestImage(user.GetAvatarUrl());
+                PhotoCommands.Picture("washer", img, new Size(260, 260), new Point(60, 120));
+                await Context.Channel.SendFileAsync("./Images/final.png");
+            }
+            catch (Exception)
+            {
+                await Context.Channel.SendMessageAsync("Avatar not found.");
+            }
+        }
+
+        [Command("howsimp")]
+        public async Task HowSimp(IGuildUser user)
+        {
+            var plainTextBytes = Encoding.UTF8.GetBytes(user.ToString());
+            string converted = Convert.ToBase64String(plainTextBytes);
+            byte[] LogoDataBy = Encoding.ASCII.GetBytes(converted);
+            int seed = 0;
+            foreach (byte byt in LogoDataBy)
+                seed += byt * 2;
+
+            Random x = new Random(seed);
+
+            await Context.Channel.SendMessageAsync(user.Mention + " is simp in " + x.Next(1, 101) + "%");
+        }
+    
+        [Command("reverse")]
+        public async Task Reverse([Remainder] string text)
+        {
+            char[] textinchar = text.ToCharArray();
+
+            for(int i = 0; i < textinchar.Length; i++)
+                textinchar[i] = text.ToCharArray()[textinchar.Length - i - 1];
+
+            string final = string.Empty;
+            foreach (char x in textinchar)
+                final += x;
+
+            await Context.Channel.SendMessageAsync(final);
+        }
+
+        [Command("howweeb")]
+        public async Task HowWeeb(IGuildUser user)
+        {
+            var plainTextBytes = Encoding.UTF8.GetBytes(user.ToString());
+            string converted = Convert.ToBase64String(plainTextBytes);
+            byte[] LogoDataBy = Encoding.ASCII.GetBytes(converted);
+            int seed = 0;
+            foreach (byte byt in LogoDataBy)
+                seed += byt * 4;
+
+            Random x = new Random(seed);
+
+            await Context.Channel.SendMessageAsync(user.Mention + " is weeb in " + x.Next(1, 101) + "%");
+        }
+
+        [Command("choose")]
+        public async Task Choose([Remainder] string text)
+        {
+            string[] types = text.Split(", ");
+
+            if(types.Length < 2)
+            {
+                await Context.Channel.SendMessageAsync("That was simple. " + types[0]);
+                return;
+            }
+
+            Random rand = new Random();
+            await Context.Channel.SendMessageAsync(types[rand.Next(0,types.Length)]);
+        }
+
+        [Command("howgay")]
+        public async Task HowGay(IGuildUser user)
+        {
+            var plainTextBytes = Encoding.UTF8.GetBytes(user.ToString());
+            string converted = Convert.ToBase64String(plainTextBytes);
+            byte[] LogoDataBy = Encoding.ASCII.GetBytes(converted);
+            int seed = 0;
+            foreach (byte byt in LogoDataBy)
+                seed += byt * 3;
+
+            Random x = new Random(seed);
+
+            await Context.Channel.SendMessageAsync(user.Mention + " is gay in " + x.Next(1, 101) + "%");
+        }
+
+        [Command("fox")]
+        public async Task Fox()
+        {
+            HttpClient client = new HttpClient();
+            var json = client.GetStringAsync("https://some-random-api.ml/img/fox");
+            Bird x = JsonConvert.DeserializeObject<Bird>(json.Result);
+            System.Drawing.Image img = HTTPrequest.RequestImage(x.link);
+            img.Save("./Images/final.png");
+            await Context.Channel.SendFileAsync("./Images/final.png");
+        }
+
+        [Command("meme")]
+        public async Task Meme()
+        {
+            HttpClient client = new HttpClient();
+            var json = client.GetStringAsync("https://some-random-api.ml/meme");
+            Meme x = JsonConvert.DeserializeObject<Meme>(json.Result);
+            System.Drawing.Image img = HTTPrequest.RequestImage(x.image);
+            img.Save("./Images/final.png");
+            await Context.Channel.SendFileAsync("./Images/final.png");
+        }
+
+        [Command("random")]
+        public async Task Random(string smin, string smax)
+        {
+            int min, max;
+
+            try
+            {
+                min = Convert.ToInt32(smin);
+                max= Convert.ToInt32(smax);
+            }
+            catch(Exception)
+            {
+                await Context.Channel.SendMessageAsync("Hey! Text is not allowed!");
+                return;
+            }
+
+            if(max <= min)
+            {
+                await Context.Channel.SendMessageAsync("Minimum value cannot be greater than maximum value");
+                return;
+            }
+
+            Random rand = new Random();
+            await Context.Channel.SendMessageAsync(rand.Next(min, max).ToString());
+        }
+
+        [Command("coinflip")]
+        public async Task Coinflip()
+        {
+            Random rand = new Random();
+            int number = rand.Next(1, 3);
+
+            if (number == 1)
+                await Context.Channel.SendMessageAsync("It's... **Tails!**");
+            else
+                await Context.Channel.SendMessageAsync("It's... **Heads!**");
+        }
+
+        [Command("animalfact")]
+        public async Task Animalfact()
+        {
+            Random rand = new Random();
+            int number = rand.Next(1, 7);
+            string api = string.Empty;
+
+            switch(number)
+            {
+                case 1:
+                    api = "https://some-random-api.ml/facts/dog";
+                    break;
+                case 2:
+                    api = "https://some-random-api.ml/facts/cat";
+                    break;
+                case 3:
+                    api = "https://some-random-api.ml/facts/bird";
+                    break;
+                case 4:
+                    api = "https://some-random-api.ml/facts/fox";
+                    break;
+                case 5:
+                    api = "https://some-random-api.ml/facts/panda";
+                    break;
+                case 6:
+                    api = "https://some-random-api.ml/facts/koala";
+                    break;
+            }
+
+            HttpClient client = new HttpClient();
+            var json = client.GetStringAsync(api);
+            Fact x = JsonConvert.DeserializeObject<Fact>(json.Result);
+            await Context.Channel.SendMessageAsync(x.fact);
+        }
+
+        [Command("tobecontinued")]
+        public async Task Tobecontinued(IGuildUser user)
+        {
+            try
+            {
+                System.Drawing.Image img = HTTPrequest.RequestImage(user.GetAvatarUrl());
+                PhotoCommands.Tobecontinued(img);
+                await Context.Channel.SendFileAsync("./Images/final.png");
+            }
+            catch (Exception)
+            {
+                await Context.Channel.SendMessageAsync("Avatar not found.");
+            }
+        }
+
+        [Command("pat")]
+        public async Task Pat(IGuildUser user)
+        {
+            HttpClient client = new HttpClient();
+            var json = client.GetStringAsync("https://some-random-api.ml/animu/pat");
+            Bird x = JsonConvert.DeserializeObject<Bird>(json.Result);
+
+            if (user.Id == Context.User.Id)
+            {
+                await Context.Channel.SendMessageAsync("You can't pat yourself!");
+                return;
+            }
+            else if (user.Id == 665514955985911818)
+            {
+                await Context.Channel.SendMessageAsync("You can't pat me! *because im shy*");
+                return;
+            }
+            else if (user.IsBot == true)
+            {
+                await Context.Channel.SendMessageAsync("You can't pat bot!");
+                return;
+            }
+
+            EmbedBuilder build = new EmbedBuilder();
+
+            build.WithTitle(Context.User.ToString() + " is patting " + user.ToString() + "!")
+                .WithImageUrl(x.link);
+
+            await Context.Channel.SendMessageAsync("", false, build.Build());
+        }
+
+        [Command("slap")]
+        public async Task Slap(IGuildUser user)
+        {
+            Bird[] final = (Bird[])JSONhandler.GetElement(JsonFile.slap);
+
+            if (user.Id == Context.User.Id)
+            {
+                await Context.Channel.SendMessageAsync("You can't slap yourself! *or can you?*");
+                return;
+            }
+            else if (user.Id == 665514955985911818)
+            {
+                await Context.Channel.SendMessageAsync("Don't slap me!!");
+                return;
+            }
+            else if (user.IsBot == true)
+            {
+                await Context.Channel.SendMessageAsync("You can't slap bot!");
+                return;
+            }
+
+            EmbedBuilder build = new EmbedBuilder();
+            Random rand = new Random();
+            int choose = rand.Next(1, 6);
+
+            switch(choose)
+            {
+                case 1:
+                    build.WithTitle(Context.User.ToString() + " is slaping " + user.ToString() + "!")
+                        .WithImageUrl(final[0].link);
+                    break;
+                case 2:
+                    build.WithTitle(Context.User.ToString() + " is slaping " + user.ToString() + "!")
+                        .WithImageUrl(final[1].link);
+                    break;
+                case 3:
+                    build.WithTitle(Context.User.ToString() + " is slaping " + user.ToString() + "!")
+                        .WithImageUrl(final[2].link);
+                    break;
+                case 4:
+                    build.WithTitle(Context.User.ToString() + " is slaping " + user.ToString() + "!")
+                        .WithImageUrl(final[3].link);
+                    break;
+                case 5:
+                    build.WithTitle(Context.User.ToString() + " is slaping " + user.ToString() + "!")
+                        .WithImageUrl(final[4].link);
+                    break;
+            }
+            
+            await Context.Channel.SendMessageAsync("", false, build.Build());
+        }
+
+        [Command("Wink")]
+        public async Task Wink()
+        {
+            HttpClient client = new HttpClient();
+            var json = client.GetStringAsync("https://some-random-api.ml/animu/wink");
+            Bird x = JsonConvert.DeserializeObject<Bird>(json.Result);
+
+            EmbedBuilder build = new EmbedBuilder();
+
+            build.WithTitle(Context.User.ToString() + " just winked!")
+                .WithImageUrl(x.link);
+
+            await Context.Channel.SendMessageAsync("", false, build.Build());
+        }
+
+        [Command("kiss")]
+        public async Task Kiss(IGuildUser user)
+        {
+            Bird[] final = (Bird[])JSONhandler.GetElement(JsonFile.kiss);
+
+            if (user.Id == Context.User.Id)
+            {
+                await Context.Channel.SendMessageAsync("You can't kiss yourself!");
+                return;
+            }
+            else if (user.Id == 665514955985911818)
+            {
+                await Context.Channel.SendMessageAsync("Don't kiss me! *Because I'm shy*");
+                return;
+            }
+            else if (user.IsBot == true)
+            {
+                await Context.Channel.SendMessageAsync("You can't kiss bot!");
+                return;
+            }
+
+            EmbedBuilder build = new EmbedBuilder();
+            Random rand = new Random();
+            int choose = rand.Next(1, 6);
+
+            switch (choose)
+            {
+                case 1:
+                    build.WithTitle(Context.User.ToString() + " is kissing " + user.ToString() + "!")
+                        .WithImageUrl(final[0].link);
+                    break;
+                case 2:
+                    build.WithTitle(Context.User.ToString() + " is kissing " + user.ToString() + "!")
+                        .WithImageUrl(final[1].link);
+                    break;
+                case 3:
+                    build.WithTitle(Context.User.ToString() + " is kissing " + user.ToString() + "!")
+                        .WithImageUrl(final[2].link);
+                    break;
+                case 4:
+                    build.WithTitle(Context.User.ToString() + " is kissing " + user.ToString() + "!")
+                        .WithImageUrl(final[3].link);
+                    break;
+                case 5:
+                    build.WithTitle(Context.User.ToString() + " is kissing " + user.ToString() + "!")
+                        .WithImageUrl(final[4].link);
+                    break;
+            }
+
+            await Context.Channel.SendMessageAsync("", false, build.Build());
         }
     }
 }

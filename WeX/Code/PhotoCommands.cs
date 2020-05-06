@@ -10,40 +10,6 @@ namespace Photos
     public static class PhotoCommands
     {
         #region Fun
-        public static void Computer(Image img)
-        {
-            ImageFactory realimg = PhotoProcessing.LoadFile("./Images/Computer.png");
-            ImageFactory background = PhotoProcessing.LoadFile("./Images/background.png");
-            ImageLayer back = new ImageLayer();
-            back.Image = realimg.Image;
-            ImageLayer profile = new ImageLayer();
-            profile.Image = img;
-            profile.Size = new Size(235, 235); //325 45
-            profile.Position = new Point(325, 20);
-
-            background.Overlay(profile);
-            background.Overlay(back);
-
-            PhotoProcessing.SaveFile(background, "./Images/final.png");
-        }
-
-        public static void Toilet(Image img)
-        {
-            ImageFactory realimg = PhotoProcessing.LoadFile("./Images/toilet.png");
-            ImageFactory background = PhotoProcessing.LoadFile("./Images/backgroundtoilet.png");
-            ImageLayer back = new ImageLayer();
-            back.Image = realimg.Image;
-            ImageLayer profile = new ImageLayer();
-            profile.Image = img;
-            profile.Size = new Size(50, 50); //325 45
-            profile.Position = new Point(120, 65);
-
-            background.Overlay(profile);
-            background.Overlay(back);
-
-            PhotoProcessing.SaveFile(background, "./Images/final.png");
-        }
-
         public static void Lovemeter(Image img1, Image img2)
         {
             ImageFactory lm = PhotoProcessing.LoadFile("./Images/lovemeter.png");
@@ -84,19 +50,37 @@ namespace Photos
             PhotoProcessing.SaveFile(lm, "./Images/final.png");
         }
 
-        public static void Pickle(Image img)
+        public static void Picture(string name, Image img, Size size, Point point)
         {
-            ImageFactory realimg = PhotoProcessing.LoadFile("./Images/pickle.png");
-            ImageFactory background = PhotoProcessing.LoadFile("./Images/picklebackground.png");
+            ImageFactory realimg = PhotoProcessing.LoadFile("./Images/"+name+".png");
+            ImageFactory background = PhotoProcessing.LoadFile("./Images/"+name+"background.png");
             ImageLayer back = new ImageLayer();
             back.Image = realimg.Image;
             ImageLayer profile = new ImageLayer();
             profile.Image = img;
-            profile.Size = new Size(250, 250); //325 45
-            profile.Position = new Point(404, 142);
+            profile.Size = size; //325 45
+            profile.Position = point;
 
             background.Overlay(profile);
             background.Overlay(back);
+
+            PhotoProcessing.SaveFile(background, "./Images/final.png");
+        }
+
+        public static void Tobecontinued(Image img)
+        {
+            ImageFactory tbc = PhotoProcessing.LoadFile("./Images/tbc.png");
+            ImageFactory background = PhotoProcessing.LoadFile("./Images/tbcbackground.png");
+            ImageLayer tobecontinued = new ImageLayer();
+            tobecontinued.Image = tbc.Image;
+            ImageLayer profile = new ImageLayer();
+            profile.Image = img;
+            profile.Size = new Size(300, 300); //325 45
+            tobecontinued.Position = new Point(5, 247);
+
+            background.Overlay(profile);
+            background.Tint(Color.Yellow);
+            background.Overlay(tobecontinued);
 
             PhotoProcessing.SaveFile(background, "./Images/final.png");
         }

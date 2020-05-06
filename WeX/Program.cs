@@ -62,8 +62,6 @@ namespace WeX
                 await message.Channel.SendMessageAsync("That's not funny");
             else if (message.Content == "wex cringe")
                 await message.Channel.SendMessageAsync("no u");
-            else if (message.Content == "wex welcomemessages")
-                await message.Channel.SendMessageAsync("You made mistake, It's wex welcomemessage not wex welcomemessages");
         }
 
         public async Task AnnounceJoinedUser(SocketGuildUser user) 

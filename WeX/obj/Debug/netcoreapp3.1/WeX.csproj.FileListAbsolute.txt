@@ -74,7 +74,6 @@ D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\runtimes\linux-x64\native\netst
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\runtimes\osx-x64\native\netstandard2.0\SQLite.Interop.dll
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\netstandard2.0\SQLite.Interop.dll
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\netstandard2.0\SQLite.Interop.dll
-D:\Projekty\Boty\WeX\WeX\obj\Debug\netcoreapp3.1\WeX.csproj.CoreCompileInputs.cache
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\computerbackground.png
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\joker.png
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\jokerbackground.png
@@ -86,3 +85,17 @@ D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\washerbackground.png
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\tbcbackground.png
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Databases\slap.json
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Databases\kiss.json
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\AnimatedGif.dll
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\toiletbackground.png
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\System.Windows.Extensions.dll
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\wasted.png
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\wastedbackground.png
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\potato.png
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\potatobackground.png
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\care.png
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\carebackground.png
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Discord.Addons.Interactive.dll
+D:\Projekty\Boty\WeX\WeX\obj\Debug\netcoreapp3.1\WeX.csproj.CoreCompileInputs.cache
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll

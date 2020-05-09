@@ -17,4 +17,12 @@ namespace Database
         public ulong serverid;
         public ulong muteroleid;
     }
+
+    public class MarriageItem
+    {
+        public ulong serverid;
+        public ulong userid;
+        public ulong user2id;
+        public string date;
+    }
 }

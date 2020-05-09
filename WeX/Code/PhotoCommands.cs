@@ -1,9 +1,11 @@
-﻿using ImageProcessor;
+﻿using Database;
+using ImageProcessor;
 using ImageProcessor.Imaging;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
+using System.Threading;
 
 namespace Photos
 {
@@ -73,9 +75,11 @@ namespace Photos
             ImageFactory background = PhotoProcessing.LoadFile("./Images/tbcbackground.png");
             ImageLayer tobecontinued = new ImageLayer();
             tobecontinued.Image = tbc.Image;
-            ImageLayer profile = new ImageLayer();
-            profile.Image = img;
-            profile.Size = new Size(300, 300); //325 45
+            ImageLayer profile = new ImageLayer
+            {
+                Image = img,
+                Size = new Size(300, 300) //325 45
+            };
             tobecontinued.Position = new Point(5, 247);
 
             background.Overlay(profile);
@@ -83,6 +87,62 @@ namespace Photos
             background.Overlay(tobecontinued);
 
             PhotoProcessing.SaveFile(background, "./Images/final.png");
+        }
+
+        public static Image Washer(Image img, int rotation)
+        {
+            ImageFactory washer = PhotoProcessing.LoadFile("./Images/washer.png");
+            ImageFactory background = PhotoProcessing.LoadFile("./Images/washerbackground.png");
+           
+            ImageLayer wash = new ImageLayer();
+            wash.Image = washer.Image;
+
+            ImageFactory prof = new ImageFactory();
+            prof.Load(img);
+            prof.Rotate(rotation);
+            ImageLayer profile = new ImageLayer();
+            profile.Image = prof.Image;
+
+            profile.Size = new Size(260, 260);
+            profile.Position = new Point(60, 110);
+
+            if(!rotation.ToString().EndsWith("0"))
+            {
+                profile.Size = new Size(370, 370);
+                profile.Position = new Point(35, 40);
+            }  
+
+            background.Overlay(profile);
+            background.Overlay(wash);
+
+            return background.Image;
+        }
+
+        public static void Wasted(Image img)
+        {
+            ImageFactory realimg = PhotoProcessing.LoadFile("./Images/wasted.png");
+            ImageFactory background = PhotoProcessing.LoadFile("./Images/wastedbackground.png");
+            ImageLayer back = new ImageLayer();
+            back.Image = realimg.Image;
+            ImageLayer profile = new ImageLayer();
+            profile.Image = img;
+            profile.Size = new Size(500, 500);
+            profile.Position = new Point(0,150);
+
+            background.Overlay(profile);
+            background.Tint(Color.Gray);
+            background.Overlay(back);
+
+            PhotoProcessing.SaveFile(background, "./Images/final.png");
+        }
+
+        public static void Pixel(Image img)
+        {
+            ImageFactory factory = new ImageFactory();
+            factory.Load(img);
+            factory.Resize(new Size(500, 500));
+            factory.Pixelate(16);
+            PhotoProcessing.SaveFile(factory, "./Images/final.png");
         }
         #endregion
     }

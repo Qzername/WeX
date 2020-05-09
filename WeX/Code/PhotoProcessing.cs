@@ -16,7 +16,7 @@ namespace Photos
             using (MemoryStream inStream = new MemoryStream(photoBytes))
             {
                 ImageFactory imageFactory = new ImageFactory(preserveExifData: true);
-                imageFactory.Load(inStream);
+                imageFactory.Load(path);
                 return imageFactory;
             }
         }

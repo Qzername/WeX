@@ -110,9 +110,9 @@ namespace WeX.Modules
             if (SQLiteHandler.NoServer(Context.Guild.Id))
                 SQLiteHandler.NewServer(Context.Guild.Id);
 
-            Messages mess = SQLiteHandler.GetMessage(Context.Channel.Id, true);
+            Messages mess = SQLiteHandler.GetMessage(Context.Guild.Id, true);
             mess.text = text;
-            SQLiteHandler.Update(mess, true, Context.Channel.Id);
+            SQLiteHandler.Update(mess, true);
 
             await Context.Channel.SendMessageAsync("New welcome text has been set");
         }
@@ -134,9 +134,9 @@ namespace WeX.Modules
                 return;
             }
 
-            Messages mess = SQLiteHandler.GetMessage(Context.Channel.Id, true);
+            Messages mess = SQLiteHandler.GetMessage(Context.Guild.Id, true);
             mess.channelid = channel.Id;
-            SQLiteHandler.Update(mess, true, Context.Channel.Id);
+            SQLiteHandler.Update(mess, true);
 
             await Context.Channel.SendMessageAsync("New welcome channel has been set");
         }
@@ -173,7 +173,7 @@ namespace WeX.Modules
                 return;
             }
 
-            SQLiteHandler.Update(mess, true, Context.Guild.Id);
+            SQLiteHandler.Update(mess, true);
         }
         #endregion
 
@@ -223,9 +223,9 @@ namespace WeX.Modules
             if (SQLiteHandler.NoServer(Context.Guild.Id))
                 SQLiteHandler.NewServer(Context.Guild.Id);
 
-            Messages mess = SQLiteHandler.GetMessage(Context.Channel.Id, false);
+            Messages mess = SQLiteHandler.GetMessage(Context.Guild.Id, false);
             mess.text = text;
-            SQLiteHandler.Update(mess, false, Context.Channel.Id);
+            SQLiteHandler.Update(mess, false);
 
             await Context.Channel.SendMessageAsync("New bye text has been set");
         }
@@ -247,9 +247,9 @@ namespace WeX.Modules
                 return;
             }
 
-            Messages mess = SQLiteHandler.GetMessage(Context.Channel.Id, false);
+            Messages mess = SQLiteHandler.GetMessage(Context.Guild.Id, false);
             mess.channelid = channel.Id;
-            SQLiteHandler.Update(mess,false, Context.Channel.Id);
+            SQLiteHandler.Update(mess,false);
 
             await Context.Channel.SendMessageAsync("New bye channel has been set");
         }
@@ -286,7 +286,7 @@ namespace WeX.Modules
                 return;
             }
 
-            SQLiteHandler.Update(mess, false, Context.Guild.Id);
+            SQLiteHandler.Update(mess, false);
         }
         #endregion
 

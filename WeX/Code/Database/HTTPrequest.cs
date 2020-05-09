@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
+using System.IO;
+
 
 namespace Database
 {
@@ -9,14 +10,14 @@ namespace Database
     {
         public static Image RequestImage(string link)
         {
-            System.Net.HttpWebRequest webRequest = (System.Net.HttpWebRequest)System.Net.HttpWebRequest.Create(link);
+            System.Net.HttpWebRequest webRequest = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(link);
             webRequest.AllowWriteStreamBuffering = true;
             webRequest.Timeout = 30000;
 
             System.Net.WebResponse webResponse = webRequest.GetResponse();
 
-            System.IO.Stream stream = webResponse.GetResponseStream();
-            Image final = System.Drawing.Image.FromStream(stream);
+            Stream stream = webResponse.GetResponseStream();
+            Image final = Image.FromStream(stream);
             webResponse.Close();
             return final;
         }

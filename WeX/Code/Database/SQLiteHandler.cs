@@ -115,16 +115,17 @@ namespace Database
             return mess;
         }
 
-        public static void Update(Messages mess, bool isWelcome, ulong id)
+        public static void Update(Messages mess, bool isWelcome)
         {
             using var con = new SQLiteConnection(path);
             con.Open();
             using var cmd = new SQLiteCommand(con);
             if (isWelcome)
-                cmd.CommandText = "UPDATE WelcomeMessages SET text = @text, ismessageonline = @message, channelid = @id;";
+                cmd.CommandText = "UPDATE WelcomeMessages SET text = @text, ismessageonline = @message, channelid = @id WHERE id=@serverid";
             else
-                cmd.CommandText = "UPDATE ByeMessages SET text = @text, ismessageonline = @message, channelid = @id;";
+                cmd.CommandText = "UPDATE ByeMessages SET text = @text, ismessageonline = @message, channelid = @id WHERE id=@serverid";
             cmd.Parameters.AddWithValue("@id", mess.channelid);
+            cmd.Parameters.AddWithValue("@serverid", mess.id);
             cmd.Parameters.AddWithValue("@message", mess.ismessagesonline);
             cmd.Parameters.AddWithValue("@text", mess.text);
             cmd.Prepare();
@@ -136,11 +137,119 @@ namespace Database
             using var con = new SQLiteConnection(path);
             con.Open();
             using var cmd = new SQLiteCommand(con);
-            cmd.CommandText = "UPDATE mainconfig SET serverid = @id, muteroleid = @muteroleid";
+            cmd.CommandText = "UPDATE mainconfig SET muteroleid = @muteroleid WHERE serverid = @id;";
             cmd.Parameters.AddWithValue("@id", mess.serverid);
             cmd.Parameters.AddWithValue("@muteroleid", mess.muteroleid);
             cmd.Prepare();
             cmd.ExecuteNonQuery();
+        }
+    
+        public static class Marriage
+        {
+            public static bool NoInMarriage(ulong serverid, ulong userid)
+            {
+                using var con = new SQLiteConnection(path);
+                con.Open();
+
+                string stm = "SELECT user1 FROM Marriage WHERE serverid=" + serverid + " AND user1="+userid;
+
+                using var cmd = new SQLiteCommand(stm, con);
+                using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                int id = 0;
+                while (rdr.Read())
+                {
+                    id = rdr.GetInt32(0);
+                }
+
+                if (id == 0)
+                    return true;
+                else
+                    return false;
+            }
+
+            public static void NewPerson(ulong serverid, ulong userid)
+            {
+                using var con = new SQLiteConnection(path);
+                con.Open();
+                using var cmd = new SQLiteCommand(con);
+                cmd.CommandText = "INSERT INTO Marriage(serverid, user1, user2, data) VALUES(@id, @yes, 0, 'none');";
+                cmd.Parameters.AddWithValue("@id", serverid);
+                cmd.Parameters.AddWithValue("@yes", userid);
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+            }
+
+            public static MarriageItem GetMarriage(ulong serverid, ulong userid)
+            {
+                MarriageItem mess = new MarriageItem();
+
+                using var con = new SQLiteConnection(path);
+                con.Open();
+
+                string stm;
+
+                stm = "SELECT * FROM Marriage WHERE serverid=" + serverid+" AND user1=" +userid;
+
+                using var cmd = new SQLiteCommand(stm, con);
+                using SQLiteDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    mess.serverid = Convert.ToUInt64(rdr.GetInt64(0));
+                    mess.userid = Convert.ToUInt64(rdr.GetInt64(1));
+                    mess.user2id = Convert.ToUInt64(rdr.GetInt64(2));
+                    mess.date = rdr.GetString(3);
+                }
+                return mess;
+            }
+
+            public static void NewMarriage(ulong serverid, ulong user1id, ulong user2id)
+            {
+                if (NoInMarriage(serverid, user2id))
+                    NewPerson(serverid, user2id);
+
+                using var con = new SQLiteConnection(path);
+                con.Open();
+                using var cmd = new SQLiteCommand(con);
+                cmd.CommandText = "UPDATE Marriage SET serverid = @serverid, user1 = @user1, user2 = @user2, data = @data WHERE serverid=@serverid AND user1 = @user1";
+                cmd.Parameters.AddWithValue("@serverid", serverid);
+                cmd.Parameters.AddWithValue("@user1", user1id);
+                cmd.Parameters.AddWithValue("@user2", user2id);
+                var dateAndTime = DateTime.Now;
+                var date = dateAndTime.Date;
+                cmd.Parameters.AddWithValue("@data", date.Day + " " +date.Month +" " +date.Year);
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+
+                cmd.CommandText = "UPDATE Marriage SET serverid = @serverid, user1 = @user2, user2 = @user1, data = @data WHERE serverid=@serverid AND user1 = @user2";
+                cmd.Parameters.AddWithValue("@serverid", serverid);
+                cmd.Parameters.AddWithValue("@user1", user1id);
+                cmd.Parameters.AddWithValue("@user2", user2id);
+                cmd.Parameters.AddWithValue("@data", DateTime.UtcNow.Date.ToString());
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+            }
+
+            public static void BrokeMarriage(ulong serverid, ulong user1id, ulong user2id)
+            {
+                using var con = new SQLiteConnection(path);
+                con.Open();
+                using var cmd = new SQLiteCommand(con);
+                cmd.CommandText = "UPDATE Marriage SET serverid = @serverid, user1 = @user1, user2 = 0, data = 'none' WHERE serverid=@serverid AND user1 = @user1";
+                cmd.Parameters.AddWithValue("@serverid", serverid);
+                cmd.Parameters.AddWithValue("@user1", user1id);
+                cmd.Parameters.AddWithValue("@user2", user2id);
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+
+                cmd.CommandText = "UPDATE Marriage SET serverid = @serverid, user1 = @user1, user2 = 0, data = 'none' WHERE serverid=@serverid AND user1 = @user2";
+                cmd.Parameters.AddWithValue("@serverid", serverid);
+                cmd.Parameters.AddWithValue("@user1", user1id);
+                cmd.Parameters.AddWithValue("@user2", user2id);
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+            }
         }
     }
 }

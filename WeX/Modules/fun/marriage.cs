@@ -46,7 +46,7 @@ namespace WeX.Modules
 
             var embed = new EmbedBuilder();
 
-            embed.WithTitle("Server Marriage")
+            embed.WithTitle("Server Marriage - " + Context.User.ToString())
                 .AddField("­­ ", "Info:")
                 .AddField("Status:", status, true)
                 .AddField("Married with:", marriedwith, true)
@@ -93,7 +93,7 @@ namespace WeX.Modules
 
             var embed = new EmbedBuilder();
 
-            embed.WithTitle("Server Marriage")
+            embed.WithTitle("Server Marriage - " +user.ToString())
                 .AddField("­­ ", "Info:")
                 .AddField("Status:", status, true)
                 .AddField("Married with:", marriedwith, true)

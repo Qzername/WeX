@@ -431,7 +431,7 @@ namespace WeX.Modules
 
             if(item.user2id != 0)
             {
-                await Context.Channel.SendMessageAsync(user.Mention + " is simp in 0%");
+                await Context.Channel.SendMessageAsync(user.Mention + " is simp in 0% because she/he is in marriage!");
                 return;
             }
 

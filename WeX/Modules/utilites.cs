@@ -299,5 +299,26 @@ namespace WeX.Modules
             }
         }
         #endregion 
+
+        [Command("crypt base64")]
+        public async Task Crypt([Remainder] string text)
+        {
+            if(text.Length > 1000)
+            {
+                await ReplyAsync("Text is too long.");
+                return;
+            }
+            var plainTextBytes = Encoding.UTF8.GetBytes(text);
+            string converted = Convert.ToBase64String(plainTextBytes);
+
+            await ReplyAsync(converted);
+        }
+
+        [Command("replace")]
+        public async Task Replace(string replace, string withtext, [Remainder]string text)
+        {
+            text.Replace(replace, withtext);
+            await ReplyAsync(text);
+        }
     }
 }

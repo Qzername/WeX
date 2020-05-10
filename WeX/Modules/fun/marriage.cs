@@ -1,13 +1,9 @@
 ﻿using Discord.Commands;
 using System.Threading.Tasks;
 using Discord;
-using Discord.WebSocket;
-using System;
 using Database;
-using System.ComponentModel.Design;
 using Discord.Addons.Interactive;
-using System.Net.Sockets;
-using static Database.SQLiteHandler;
+
 
 namespace WeX.Modules
 {

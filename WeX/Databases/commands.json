@@ -1,0 +1,647 @@
+﻿[
+  {
+    "command": "help",
+    "firstone": "Get all commands WeX have!",
+    "firstusage": "wex help",
+    "secone": "Get specific help for a command",
+    "secusage": "wex help [command]"
+  },
+  {
+    "command": "info",
+    "firstone": "Get all commands WeX have!",
+    "firstusage": "wex help",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "ping",
+    "firstone": "Pong!",
+    "firstusage": "wex ping",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "say",
+    "firstone": "I will say what you want me to say",
+    "firstusage": "wex say",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "dice",
+    "firstone": "Rollin' the dice",
+    "firstusage": "wex dice",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "computer",
+    "firstone": "Ping an user and she/he will be in computer.",
+    "firstusage": "wex computer",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "toilet",
+    "firstone": "Ping an user and she/he will be in toilet.",
+    "firstusage": "wex toilet",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "cat",
+    "firstone": "Sends random cat picture",
+    "firstusage": "wex cat",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "dog",
+    "firstone": "Sends random dog picture",
+    "firstusage": "wex dog",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "bird",
+    "firstone": "Sends random bird picture",
+    "firstusage": "wex bird",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "rps",
+    "firstone": "Rock, paper, scissors!",
+    "firstusage": "wex rps [rock/paper/scissors]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "lenny",
+    "firstone": "Sends lennyface!",
+    "firstusage": "wex lenny",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "spoiler",
+    "firstone": "It will spoiler text that you write down",
+    "firstusage": "wex spoiler [text]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "emojileters",
+    "firstone": "It will change your text into emoji",
+    "firstusage": "wex emojileters [text]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "hug",
+    "firstone": "Hug a person!",
+    "firstusage": "wex hug [mention]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "lovemeter",
+    "firstone": "Check in what procent two person are loving each other",
+    "firstusage": "wex lovemeter [mention] [mention]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "drake",
+    "firstone": "Drake meme generator",
+    "firstusage": "wex drake [mention] [mention]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "pickle",
+    "firstone": "Ping an user and she/he will be in pickle",
+    "firstusage": "wex pickle [mention]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "food",
+    "firstone": "Sends random food picture",
+    "firstusage": "wex food",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "reverse",
+    "firstone": "Sends text reversed",
+    "firstusage": "wex reverse [text]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "coinflip",
+    "firstone": "Just a coinflip",
+    "firstusage": "wex coinflip",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "random",
+    "firstone": "I will choose random number from range you write down",
+    "firstusage": "wex random [min. number] [max. number]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "meme",
+    "firstone": "Sends random meme",
+    "firstusage": "wex meme",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "fox",
+    "firstone": "Sends random fox picture",
+    "firstusage": "wex fox",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "howgay",
+    "firstone": "Checks how gay is person you mention",
+    "firstusage": "wex howgay",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "choose",
+    "firstone": "I will choose one thing you write down ",
+    "firstusage": "wex choose [texts] (separator ', ')",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "howweeb",
+    "firstone": "Checks how weeb is person you mention",
+    "firstusage": "wex howweeb [mention]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "joke",
+    "firstone": "Sends funny joke (joke can be offensive)",
+    "firstusage": "wex joke",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "keanu",
+    "firstone": "Became keanu",
+    "firstusage": "wex keanu [mention]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "tobecontinued",
+    "firstone": "To be continued... ",
+    "firstusage": "wex tobecontinued [mention]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "washer",
+    "firstone": "Ping a person and she/he will be in washer",
+    "firstusage": "wex washer [mention]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "animalfact",
+    "firstone": "Sends fact about animal",
+    "firstusage": "wex animalfact",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "cookie",
+    "firstone": "Give a cookie to person!",
+    "firstusage": "wex cookie [mention]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "f",
+    "firstone": "Pay respect...",
+    "firstusage": "wex f",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "pat",
+    "firstone": "Pat a person",
+    "firstusage": "wex pat [mention]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "kiss",
+    "firstone": "Kiss a person",
+    "firstusage": "wex kiss [mention]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "wasted",
+    "firstone": "Ping a person and she/he will be wasted",
+    "firstusage": "wex wasted [mention]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "potato",
+    "firstone": "Ping a person and she/he will be in potato",
+    "firstusage": "wex potato [mention]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "howhorny",
+    "firstone": "Check how horny is person you mention",
+    "firstusage": "wex howhorny [mention]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "pixel",
+    "firstone": "Pixel a person you mention",
+    "firstusage": "wex pixel [mention]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "slap",
+    "firstone": "Slap a person",
+    "firstusage": "wex slap [mention]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "howsimp",
+    "firstone": "Check how simp is person you mention",
+    "firstusage": "wex howsimp [mention]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "wink",
+    "firstone": "Wink wink :wink:",
+    "firstusage": "wex wink",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "marriage",
+    "firstone": "Check your status! You are single or marriaged?",
+    "firstusage": "wex marriage",
+    "secone": "Chech status of person you mention!",
+    "secusage": "wex marriage [mention]"
+  },
+  {
+    "command": "marriage request",
+    "firstone": "Request marriage",
+    "firstusage": "wex marriage request [mention]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "yes",
+    "firstone": "Accept marriage",
+    "firstusage": "wex yes",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "no",
+    "firstone": "Denied marriage",
+    "firstusage": "wex no",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "cancel marriage",
+    "firstone": "Cancel marriage",
+    "firstusage": "wex cancel marriage",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "care",
+    "firstone": "Create new care emoji!",
+    "firstusage": "wex care [mention]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "shibe",
+    "firstone": "Sends random shibe picture",
+    "firstusage": "wex shibe",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "russianroulette",
+    "firstone": "You will be dead or not? Check it out!",
+    "firstusage": "wex russianroulette",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "add",
+    "firstone": "I will add numbers and show result",
+    "firstusage": "wex add [number] [number]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "minus",
+    "firstone": "I will minus numbers and show result",
+    "firstusage": "wex minus [number] [number]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "multiply",
+    "firstone": "I will multiply numbers and show result",
+    "firstusage": "wex multiply [number] [number]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "devide",
+    "firstone": "I will devide numbers and show result",
+    "firstusage": "wex devide [number] [number]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "root",
+    "firstone": "I will get square root of number and show result",
+    "firstusage": "wex root [number]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "square",
+    "firstone": "I will get square of number and show result",
+    "firstusage": "wex square [number]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "power",
+    "firstone": "I will get power (that you write after number) of number and show result",
+    "firstusage": "wex power [number] [number (power of number)]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "min",
+    "firstone": "I will get the smallest of numbers you write me down and show result",
+    "firstusage": "wex min [numbers]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "max",
+    "firstone": "I will get the biggest of numbers you write me down and show result",
+    "firstusage": "wex max [numbers]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "avg",
+    "firstone": "I will get avreage of numbers you write me down and show result",
+    "firstusage": "wex avg [numbers]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "avatar",
+    "firstone": "Mention a user and I will get that user avatar URL!",
+    "firstusage": "wex avatar [mention]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "idinfo",
+    "firstone": "Sends serverID, channelID and userID",
+    "firstusage": "wex idinfo",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "mal",
+    "firstone": "Searches for user by nickname on MyAnimeList",
+    "firstusage": "wex mal [nickname]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "anime",
+    "firstone": "Searches for anime by It's name",
+    "firstusage": "wex anime [animename]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "crypt base64",
+    "firstone": "Crypt text to base64",
+    "firstusage": "wex crypt base64 [text]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "replace",
+    "firstone": "Replace characters to text you write down",
+    "firstusage": "wex replace [text to replace] [text to replace with] [text]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "clear",
+    "firstone": "Clears the amount you give messages",
+    "firstusage": "wex clear [amount]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "kick",
+    "firstone": "Kick a person",
+    "firstusage": "wex kick [mention]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "ban",
+    "firstone": "Ban a person",
+    "firstusage": "wex ban [mention]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "serverstats",
+    "firstone": "I'll show servestats",
+    "firstusage": "wex serverstats",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "welcomemessage",
+    "firstone": "I'll show welcome message server status",
+    "firstusage": "wex welcomemessage",
+    "secone": "On/Off welcome message",
+    "secusage": "wex welcomemessage [on/off]"
+  },
+  {
+    "command": "welcomechannel",
+    "firstone": "Set new welcome channel",
+    "firstusage": "wex welcomechannel",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "welcometext",
+    "firstone": "Set new welcome text (By using [server] it will replace it with server name and using [user] it will replace with user mention.",
+    "firstusage": "wex welcometext",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "byemessage",
+    "firstone": "I'll show bye message server status",
+    "firstusage": "wex byemessage",
+    "secone": "On/Off bye message",
+    "secusage": "wex byemessage [on/off]"
+  },
+  {
+    "command": "byechannel",
+    "firstone": "Set new bye channel",
+    "firstusage": "wex byechannel",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "byetext",
+    "firstone": "Set new bye text (By using [server] it will replace it with server name and using [user] it will replace with user mention.",
+    "firstusage": "wex welcometext",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "mute",
+    "firstone": "Mute someone.",
+    "firstusage": "wex mute [mention]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "setmute",
+    "firstone": "Set mute role.",
+    "firstusage": "wex mute [mention]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "autorole",
+    "firstone": "Set autorole role.",
+    "firstusage": "wex autorole [role]",
+    "secone": "Show autorole role",
+    "secusage": "wex autorole"
+  },
+  {
+    "command": "autorole reset",
+    "firstone": "Reset autorole role.",
+    "firstusage": "wex autorole reset [role]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "prefix",
+    "firstone": "Set prefix.",
+    "firstusage": "wex prefix [prefix]",
+    "secone": "Check prefix",
+    "secusage": "wex prefix"
+  },
+  {
+    "command": "clearprefix",
+    "firstone": "Clear prefix.",
+    "firstusage": "wex clearprefix",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "join",
+    "firstone": "Bot will join to channel were are you.",
+    "firstusage": "wex join",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "play",
+    "firstone": "Bot will play music.",
+    "firstusage": "wex play [link]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "queue",
+    "firstone": "Bot will show current playlist.",
+    "firstusage": "wex queue",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "leave",
+    "firstone": "Bot will leave current channel.",
+    "firstusage": "wex leave",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "stop",
+    "firstone": "Bot will clear queue. Requaries 'Deaf members' permision",
+    "firstusage": "wex stop",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "volume",
+    "firstone": "Bot will change volume of music between 2 and 150 percent. Requaries 'Deaf members' permision",
+    "firstusage": "wex volume",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "skip",
+    "firstone": "Bot will skip song.",
+    "firstusage": "wex skip",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "pause",
+    "firstone": "Bot will be paused.",
+    "firstusage": "wex pause",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "resume",
+    "firstone": "Bot will be resumed.",
+    "firstusage": "wex resume",
+    "secone": "null",
+    "secusage": "null"
+  }
+
+]

@@ -3,8 +3,6 @@ using Discord;
 using Discord.Commands;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -319,6 +317,19 @@ namespace WeX.Modules
         {
             text.Replace(replace, withtext);
             await ReplyAsync(text);
+        }
+
+        [Command("serverstats")]
+        public async Task ServerStats()
+        {
+            var embed = new EmbedBuilder();
+
+            embed.WithTitle("Server stats")
+                .AddField("Users:", Context.Guild.Users.Count.ToString(), true)
+                .AddField("Voice channels:", Context.Guild.VoiceChannels.Count, true)
+                .AddField("Text channels:", Context.Guild.TextChannels.Count, true);
+
+            await Context.Channel.SendMessageAsync("",false,embed.Build());
         }
     }
 }

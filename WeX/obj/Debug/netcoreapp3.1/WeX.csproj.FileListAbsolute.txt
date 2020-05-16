@@ -96,6 +96,15 @@ D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\potatobackground.png
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\care.png
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Images\carebackground.png
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Discord.Addons.Interactive.dll
-D:\Projekty\Boty\WeX\WeX\obj\Debug\netcoreapp3.1\WeX.csproj.CoreCompileInputs.cache
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
 D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Databases\commands.json
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Victoria.dll
+D:\Projekty\Boty\WeX\WeX\obj\Debug\netcoreapp3.1\WeX.csproj.CoreCompileInputs.cache
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+D:\Projekty\Boty\WeX\WeX\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll

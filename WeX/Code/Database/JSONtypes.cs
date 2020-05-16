@@ -87,4 +87,19 @@ namespace Database
     {
         public string fact;
     }
+
+    public class Joke
+    {
+        public string setup;
+        public string delivery;
+    }
+
+    public class Command
+    {
+        public string command;
+        public string firstone;
+        public string firstusage;
+        public string secone;
+        public string secusage;
+    }
 }

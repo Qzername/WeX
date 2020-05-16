@@ -68,6 +68,12 @@ namespace Database
 
             return text;
         }
+
+        public static Command[] GetCommands()
+        {
+            Command[] x = JsonConvert.DeserializeObject<Command[]>(GetFile(JsonFile.commands));
+            return x;
+        }
     }
 
     public enum JsonFile
@@ -75,6 +81,7 @@ namespace Database
         config,
         EightBall,
         slap,
-        kiss
+        kiss,
+        commands
     }
 }

@@ -57,7 +57,7 @@ namespace Database
             cmd.Prepare();
             cmd.ExecuteNonQuery();
 
-            cmd.CommandText = "INSERT INTO mainconfig(serverid, muteroleid) VALUES(@id, 0);";
+            cmd.CommandText = "INSERT INTO mainconfig(serverid, muteroleid, autoroleid, logchannelid, prefix) VALUES(@id, 0, 0, 0, 'null');";
             cmd.Parameters.AddWithValue("@id", serverid);
             cmd.Prepare();
             cmd.ExecuteNonQuery();
@@ -111,6 +111,9 @@ namespace Database
             {
                 mess.serverid = Convert.ToUInt64(rdr.GetInt64(0));
                 mess.muteroleid = Convert.ToUInt64(rdr.GetInt64(1));
+                mess.autoroleid = Convert.ToUInt64(rdr.GetInt64(2));
+                mess.logchannelid = Convert.ToUInt64(rdr.GetInt64(3));
+                mess.prefix = rdr.GetString(4);
             }
             return mess;
         }
@@ -137,9 +140,12 @@ namespace Database
             using var con = new SQLiteConnection(path);
             con.Open();
             using var cmd = new SQLiteCommand(con);
-            cmd.CommandText = "UPDATE mainconfig SET muteroleid = @muteroleid WHERE serverid = @id;";
+            cmd.CommandText = "UPDATE mainconfig SET muteroleid = @muteroleid, autoroleid =@autoroleid, logchannelid = @logchannel, prefix=@prefix WHERE serverid = @id;";
             cmd.Parameters.AddWithValue("@id", mess.serverid);
             cmd.Parameters.AddWithValue("@muteroleid", mess.muteroleid);
+            cmd.Parameters.AddWithValue("@autoroleid", mess.autoroleid);
+            cmd.Parameters.AddWithValue("@logchannel", mess.logchannelid);
+            cmd.Parameters.AddWithValue("@prefix", mess.prefix);
             cmd.Prepare();
             cmd.ExecuteNonQuery();
         }

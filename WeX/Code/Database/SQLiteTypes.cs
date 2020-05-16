@@ -16,6 +16,9 @@ namespace Database
     {
         public ulong serverid;
         public ulong muteroleid;
+        public ulong autoroleid;
+        public ulong logchannelid;
+        public string prefix;
     }
 
     public class MarriageItem

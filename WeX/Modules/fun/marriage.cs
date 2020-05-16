@@ -4,7 +4,6 @@ using Discord;
 using Database;
 using Discord.Addons.Interactive;
 
-
 namespace WeX.Modules
 {
     public class MarriageCommands : InteractiveBase
@@ -96,7 +95,7 @@ namespace WeX.Modules
                 .AddField("Marriage date:", marrieddate, true)
                 .AddField("­­­ ", "Marriage Commands:")
                 .AddField("Request marriage", "marriage request", true)
-                .AddField("Accept marriage", "marriage accept", true)
+                .AddField("Accept/denied marriage", "(wex) yes/no", true)
                 .AddField("Cancel marriage", "cancel marriage", true)
                 .WithColor(Color.Blue);
 

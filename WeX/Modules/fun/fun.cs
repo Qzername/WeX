@@ -838,5 +838,32 @@ namespace WeX.Modules
             img.Save("./Images/final.png");
             await Context.Channel.SendFileAsync("./Images/final.png");
         }
+
+        [Command("russianroulette")]
+        public async Task RussianRoulette()
+        {
+            Random x = new Random();
+            int y = x.Next(1, 7);
+
+            if (y == 6)
+            {
+                await ReplyAsync("Boom! You are dead!");
+                return;
+            }
+            else
+                await ReplyAsync("Boom! You are alive!");
+        }
+
+        [Command("joke", RunMode = RunMode.Async)]
+        public async Task PlayAsync()
+        {
+            HttpClient client = new HttpClient();
+            var json = client.GetStringAsync("https://sv443.net/jokeapi/v2/joke/Any?type=twopart");
+            Joke x = JsonConvert.DeserializeObject<Joke>(json.Result);
+
+            await ReplyAsync(x.setup);
+            await Task.Delay(5000);
+            await ReplyAsync(x.delivery);
+        }
     }
 }

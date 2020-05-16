@@ -4,12 +4,6 @@ using Discord.Commands;
 using Discord.WebSocket;
 using System;
 using System.Collections.Generic;
-using System.Data.SQLite;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace WeX.Modules
@@ -25,6 +19,7 @@ namespace WeX.Modules
             await Context.Channel.SendMessageAsync("**" + user.ToString() + "** has been kicked by: **" + Context.User.ToString()+ "**");
         }
 
+        #region Ban
         [Command("ban")]
         [RequireUserPermission(GuildPermission.BanMembers)]
         [RequireBotPermission(GuildPermission.BanMembers)]
@@ -33,6 +28,54 @@ namespace WeX.Modules
             await user.BanAsync(7);
             await Context.Channel.SendMessageAsync("**" + user.ToString() + "** has been banned by: **" + Context.User.ToString() + "**");
         }
+        
+        [Command("softban")]
+        [RequireUserPermission(GuildPermission.BanMembers)]
+        [RequireBotPermission(GuildPermission.BanMembers)]
+        public async Task SoftBan(IGuildUser user)
+        {
+            await user.BanAsync(7);
+            await user.Guild.RemoveBanAsync(user);
+            await Context.Channel.SendMessageAsync("**" + user.ToString() + "** has been softbanned by: **" + Context.User.ToString() + "**");
+        }
+        
+        [Command("hackban")]
+        [RequireUserPermission(GuildPermission.BanMembers)]
+        [RequireBotPermission(GuildPermission.BanMembers)]
+        public async Task HackBan(string userid)
+        {
+            ulong id;
+
+            try
+            {
+                id = Convert.ToUInt64(userid);
+            }
+            catch(Exception)
+            {
+                await ReplyAsync("ID cannot be text");
+                return;
+            }
+
+            IGuildUser user;
+            try
+            {
+                var userr = Context.Guild.GetUser(id);
+                user = (userr as IGuildUser);
+
+                if (user == null)
+                    throw new Exception();
+            }
+            catch(Exception)
+            {
+                await ReplyAsync("User not found");
+                return;
+            }
+
+            await user.BanAsync(7);
+            await user.Guild.RemoveBanAsync(user);
+            await Context.Channel.SendMessageAsync("**" + user.ToString() + "** has been hackbanned by: **" + Context.User.ToString() + "**");
+        }
+        #endregion 
 
         [Command("clear")]
         [RequireUserPermission(ChannelPermission.ManageMessages)]
@@ -58,10 +101,12 @@ namespace WeX.Modules
 
             IEnumerable<IMessage> messages = await Context.Channel.GetMessagesAsync(total + 1).FlattenAsync();
             await ((ITextChannel)Context.Channel).DeleteMessagesAsync(messages);
-            const int delay = 3000;
             IUserMessage m = await ReplyAsync($"I have deleted {total} messages :)");
-            await Task.Delay(delay);
-            await m.DeleteAsync();
+            await Task.Delay(3000);
+            try
+            { await m.DeleteAsync(); }
+            catch(Exception)
+            { return; }
         }
 
         #region Welcome messages
@@ -205,8 +250,8 @@ namespace WeX.Modules
             embed.WithTitle("Bye messages")
                 .AddField("­­ ", "Special Commands:")
                 .AddField("Set on/off", "byemessage [on/off]", true)
-                .AddField("Set bye channel", "welcomechannel", true)
-                .AddField("Set bye message", "welcometext", true)
+                .AddField("Set bye channel", "byechannel", true)
+                .AddField("Set bye message", "byetext", true)
                 .AddField("­­ ", "Status:")
                 .AddField("Is bye message active?", noyes, true)
                 .AddField("Bye channel", channel, true)
@@ -322,6 +367,37 @@ namespace WeX.Modules
             await Context.Channel.SendMessageAsync("Done.");
         }
 
+        [Command("mute")]
+        [RequireUserPermission(ChannelPermission.ManageRoles)]
+        [RequireBotPermission(ChannelPermission.ManageRoles)]
+        public async Task Mute()
+        {
+            if (SQLiteHandler.NoServer(Context.Guild.Id))
+                SQLiteHandler.NewServer(Context.Guild.Id);
+
+            MainConfig main = SQLiteHandler.GetMessage(Context.Guild.Id);
+
+            if(main.muteroleid == 0)
+            {
+                await Context.Channel.SendMessageAsync("There is no mute role.");
+                return;
+            }
+
+            SocketRole role;
+
+            try
+            {
+                role = Context.Guild.GetRole(main.muteroleid);
+            }
+            catch(Exception)
+            {
+                await Context.Channel.SendMessageAsync("There is no mute role");
+                return;
+            }
+
+            await Context.Channel.SendMessageAsync("Muterole: " + role.ToString());
+        }
+
         [Command("unmute")]
         [RequireUserPermission(ChannelPermission.ManageRoles)]
         [RequireBotPermission(ChannelPermission.ManageRoles)]
@@ -353,7 +429,6 @@ namespace WeX.Modules
             await Context.Channel.SendMessageAsync("Done.");
         }
 
-
         [Command("setmute")]
         [RequireUserPermission(ChannelPermission.ManageRoles)]
         [RequireBotPermission(ChannelPermission.ManageRoles)]
@@ -367,6 +442,152 @@ namespace WeX.Modules
             SQLiteHandler.Update(config);
 
             await Context.Channel.SendMessageAsync("New role has been set.");
+        }
+        #endregion
+
+        [Command("setnickname")]
+        [RequireUserPermission(GuildPermission.ChangeNickname)]
+        [RequireBotPermission(GuildPermission.ChangeNickname)]
+        public async Task SetNickname(IGuildUser user, [Remainder] string nickname)
+        {
+            if(nickname.Length > 32)
+            {
+                await ReplyAsync("Text cannot be longer than 32 characters");
+                return;
+            }
+
+            await user.ModifyAsync(x => {
+                x.Nickname = nickname;
+            });
+
+            await ReplyAsync("Done.");
+        }
+
+        #region Autorole
+        [Command("autorole")]
+        [RequireUserPermission(ChannelPermission.ManageRoles)]
+        [RequireBotPermission(ChannelPermission.ManageRoles)]
+        public async Task Autorole(IRole role)
+        {
+            if (SQLiteHandler.NoServer(Context.Guild.Id))
+                SQLiteHandler.NewServer(Context.Guild.Id);
+
+            MainConfig config = SQLiteHandler.GetMessage(Context.Guild.Id);
+            config.autoroleid = role.Id;
+            SQLiteHandler.Update(config);
+
+            await Context.Channel.SendMessageAsync("New role has been set.");
+        }
+        
+        [Command("autorole")]
+        [RequireUserPermission(ChannelPermission.ManageRoles)]
+        [RequireBotPermission(ChannelPermission.ManageRoles)]
+        public async Task Autorole()
+        {
+            if (SQLiteHandler.NoServer(Context.Guild.Id))
+                SQLiteHandler.NewServer(Context.Guild.Id);
+
+            MainConfig config = SQLiteHandler.GetMessage(Context.Guild.Id);
+
+            if(config.autoroleid == 0)
+            {
+                await Context.Channel.SendMessageAsync("Role is not set. Please set it using 'wex autorole [role]` command");
+                return;
+            }
+
+            if(Context.Guild.GetRole(config.autoroleid) == null)
+            {
+                await Context.Channel.SendMessageAsync("Role is not set. Please set it using 'wex autorole [role]` command");
+                return;
+            }
+
+            var role = Context.Guild.GetRole(config.autoroleid);
+            await Context.Channel.SendMessageAsync("Current role is: "+role.Mention);
+        }
+        
+        [Command("autoroleclear")]
+        [RequireUserPermission(ChannelPermission.ManageRoles)]
+        [RequireBotPermission(ChannelPermission.ManageRoles)]
+        public async Task AutoroleClear()
+        {
+            if (SQLiteHandler.NoServer(Context.Guild.Id))
+            {
+                SQLiteHandler.NewServer(Context.Guild.Id);
+                return;
+            }
+
+            MainConfig config = SQLiteHandler.GetMessage(Context.Guild.Id);
+            config.autoroleid = 0;
+            SQLiteHandler.Update(config);
+
+            await Context.Channel.SendMessageAsync("Autorole has been cleared.");
+        }
+        #endregion
+
+        #region Prefix
+        [Command("prefix")]
+        [RequireUserPermission(ChannelPermission.ManageMessages)]
+        [RequireBotPermission(ChannelPermission.ManageMessages)]
+        public async Task Prefix(string customprefix)
+        {
+            if (SQLiteHandler.NoServer(Context.Guild.Id))
+                SQLiteHandler.NewServer(Context.Guild.Id);
+
+            if(customprefix == "null" || customprefix.ToLower().Contains("wex"))
+            {
+                await ReplyAsync("Sorry, I can't set it to this specific one.");
+                return;
+            }
+            else if(customprefix.Length > 5)
+            {
+                await ReplyAsync("Custom prefix can't be longer than 5 characters.");
+                return;
+            }
+
+            MainConfig config = SQLiteHandler.GetMessage(Context.Guild.Id);
+            config.prefix = customprefix;
+            SQLiteHandler.Update(config);
+
+            await Context.Channel.SendMessageAsync("New prefix has been set.");
+        }
+
+        [Command("prefix")]
+        public async Task Prefix()
+        {
+            if (SQLiteHandler.NoServer(Context.Guild.Id))
+                SQLiteHandler.NewServer(Context.Guild.Id);
+
+            MainConfig config = SQLiteHandler.GetMessage(Context.Guild.Id);
+
+            if(config.prefix == "null")
+            {
+                await ReplyAsync("Custom prefix is not set.");
+                return;
+            }
+
+            await Context.Channel.SendMessageAsync("Current custom prefix: " + config.prefix);
+        }
+
+        [Command("clearprefix")]
+        [RequireUserPermission(ChannelPermission.ManageMessages)]
+        [RequireBotPermission(ChannelPermission.ManageMessages)]
+        public async Task ClearPrefix()
+        {
+            if (SQLiteHandler.NoServer(Context.Guild.Id))
+                SQLiteHandler.NewServer(Context.Guild.Id);
+
+            MainConfig config = SQLiteHandler.GetMessage(Context.Guild.Id);
+
+            if (config.prefix == "null")
+            {
+                await ReplyAsync("Custom prefix is not set.");
+                return;
+            }
+
+            config.prefix = "null";
+            SQLiteHandler.Update(config);
+
+            await Context.Channel.SendMessageAsync("Done.");
         }
         #endregion
     }

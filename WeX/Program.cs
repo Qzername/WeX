@@ -4,6 +4,8 @@ using Discord;
 using Discord.WebSocket;
 using Discord.Commands;
 using Database;
+using System.Linq;
+using Victoria;
 
 namespace WeX
 {
@@ -58,7 +60,7 @@ namespace WeX
             if (message.Author.Id == _client.CurrentUser.Id)
                 return;
 
-            if (message.Content == "wex sex")
+                if (message.Content == "wex sex")
                 await message.Channel.SendMessageAsync("That's not funny");
             else if (message.Content == "wex cringe")
                 await message.Channel.SendMessageAsync("no u");
@@ -71,14 +73,35 @@ namespace WeX
 
             Messages mess = SQLiteHandler.GetMessage(user.Guild.Id, true);
 
-            if (mess.ismessagesonline == "false")
+            if (mess.ismessagesonline != "false")
+            {
+                SocketTextChannel x = user.Guild.GetChannel(mess.channelid) as SocketTextChannel;
+                string final = mess.text;
+                final = final.Replace("[user]", "<@" + user.Id + ">");
+                final = final.Replace("[server]", user.Guild.ToString());
+                await x.SendMessageAsync(final);
+            }
+
+            MainConfig main = SQLiteHandler.GetMessage(user.Guild.Id);
+
+            if (user.Guild.Id == 0)
                 return;
 
-            SocketTextChannel x = user.Guild.GetChannel(mess.channelid) as SocketTextChannel;
-            string final = mess.text;
-            final = final.Replace("[user]", "<@" + user.Id + ">");
-            final = final.Replace("[server]", user.Guild.ToString());
-            await x.SendMessageAsync(final);
+            if( user.Guild.GetRole(main.autoroleid) == null)
+            {
+                if (user.Guild.TextChannels.Count == 0)
+                {
+                    var owner = user.Guild.GetUser(user.Guild.OwnerId);
+                    await owner.SendMessageAsync("Cannot give autorole. Please check if role exists or if I got permisions.");
+                    return;
+                }
+
+                SocketTextChannel x = user.Guild.TextChannels.ToList()[0];
+                await x.SendMessageAsync("Cannot give autorole. Please check if role exists or if I got permisions.");
+                return;
+            }
+
+            await user.AddRoleAsync(user.Guild.GetRole(main.autoroleid));
         }
 
         public async Task AnnounceLeftUser(SocketGuildUser user)
@@ -97,5 +120,6 @@ namespace WeX
             final = final.Replace("[server]", user.Guild.ToString());
             await x.SendMessageAsync(final);
         }
+
     }
 }

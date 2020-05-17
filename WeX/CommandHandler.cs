@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Database;
 using Victoria;
 using Victoria.EventArgs;
+using System.Linq;
+using Discord;
 
 namespace WeX
 {
@@ -34,8 +36,20 @@ namespace WeX
             _Service = new CommandService();
             _Service.AddModulesAsync(Assembly.GetEntryAssembly(), provider);
             lavanode.OnTrackEnded += TrackEnded;
+            _Client.JoinedGuild += JoinGuild;
             _Client.MessageReceived += HandleCommandAsync;
             _Client.Ready += Ready;
+        }
+
+        public async Task JoinGuild(SocketGuild guild)
+        {
+            var embed = new EmbedBuilder();
+
+            embed.WithTitle("Welcome to WeX!")
+                .WithDescription("Thanks for adding! If you wanna know what can I do, use `wex help` command! \n\n Have an idea for command? Maybe found bug? Or just help bot grow? Please join to my Discord Support Server! \nhttps://discord.gg/jYhuRJC")
+                .WithFooter("Sample Text, uh yes");
+
+            await guild.TextChannels.First().SendMessageAsync(embed: embed.Build());
         }
 
         public async Task TrackEnded(TrackEndedEventArgs args)

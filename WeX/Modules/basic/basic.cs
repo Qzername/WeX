@@ -23,7 +23,7 @@ namespace WeX.Modules
                 .AddField("Author: ", "Uzer#9084")
                 .AddField("Special thanks: ", "Blasstah#5656")
                 .AddField("Oficial Discord:", "https://discord.gg/jYhuRJC")
-                .WithFooter("Bot version: 0.3v");
+                .WithFooter("Bot version: 0.4v");
 
             await Context.Channel.SendMessageAsync("", false, bud.Build());
         }

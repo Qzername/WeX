@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Discord;
 using Victoria.Enums;
 using Discord.WebSocket;
+using System.Diagnostics.Contracts;
 
 namespace WeX.Modules
 {
@@ -14,9 +15,20 @@ namespace WeX.Modules
     {
         public LavaNode link { get; set; }
 
+        public async Task SlientLeft()
+        {
+            var player = link.GetPlayer(Context.Guild as IGuild);
+            await link.LeaveAsync(player.VoiceChannel);
+            await player.StopAsync();
+        }
+
         [Command("join")]
         public async Task Join()
         {
+            IGuildUser user = (Context.Guild.GetUser(665514955985911818) as IGuildUser);
+            if (user.VoiceChannel is null && link.HasPlayer(Context.Guild as IGuild))
+                await SlientLeft();
+
             if (link.HasPlayer(Context.Guild as IGuild))
             {
                 await ReplyAsync("I'm already in voice channel.");
@@ -45,6 +57,10 @@ namespace WeX.Modules
         [Command("leave")]
         public async Task Leave()
         {
+            IGuildUser user = (Context.Guild.GetUser(665514955985911818) as IGuildUser);
+            if (user.VoiceChannel is null && link.HasPlayer(Context.Guild as IGuild))
+                await SlientLeft();
+
             try
             {
                 var player = link.GetPlayer(Context.Guild as IGuild);
@@ -65,14 +81,18 @@ namespace WeX.Modules
         [Command("play")]
         public async Task Play([Remainder]string music)
         {
-            if ((Context.User as SocketGuildUser).VoiceChannel == null)
-                if((Context.User as IVoiceState).VoiceChannel is null)
-                {
-                    await ReplyAsync("You must be in a voice channel!");
-                    return;
-                }
-                else
-                    await Join();
+            IGuildUser user = (Context.Guild.GetUser(665514955985911818) as IGuildUser);
+            if (user.VoiceChannel is null && link.HasPlayer(Context.Guild as IGuild))
+                await SlientLeft();
+
+            if ((Context.User as SocketGuildUser).VoiceChannel == null && (Context.User as IVoiceState).VoiceChannel is null)
+            {
+                await ReplyAsync("You must be in a voice channel!");
+                return;
+            }
+            
+            if(!link.HasPlayer(Context.Guild as IGuild))
+                await Join();
 
             if (!link.HasPlayer(Context.Guild as IGuild))
             {
@@ -123,6 +143,10 @@ namespace WeX.Modules
         [Command("queue")]
         public async Task Queue()
         {
+            IGuildUser user = (Context.Guild.GetUser(665514955985911818) as IGuildUser);
+            if (user.VoiceChannel is null && link.HasPlayer(Context.Guild as IGuild))
+                await SlientLeft();
+
             try
             {
                 var descriptionBuilder = new StringBuilder();
@@ -183,6 +207,10 @@ namespace WeX.Modules
         [Command("skip")]
         public async Task Skip()
         {
+            IGuildUser user = (Context.Guild.GetUser(665514955985911818) as IGuildUser);
+            if (user.VoiceChannel is null && link.HasPlayer(Context.Guild as IGuild))
+                await SlientLeft();
+
             try
             {
                 var player = link.GetPlayer(Context.Guild as IGuild);
@@ -275,6 +303,10 @@ namespace WeX.Modules
         [RequireUserPermission(GuildPermission.DeafenMembers)]
         public async Task Stop()
         {
+            IGuildUser user = (Context.Guild.GetUser(665514955985911818) as IGuildUser);
+            if (user.VoiceChannel is null && link.HasPlayer(Context.Guild as IGuild))
+                await SlientLeft();
+
             try
             {
                 var player = link.GetPlayer(Context.Guild as IGuild);
@@ -307,6 +339,10 @@ namespace WeX.Modules
         [Command("pause")]
         public async Task Pause()
         {
+            IGuildUser user = (Context.Guild.GetUser(665514955985911818) as IGuildUser);
+            if (user.VoiceChannel is null && link.HasPlayer(Context.Guild as IGuild))
+                await SlientLeft();
+
             try
             {
                 var player = link.GetPlayer(Context.Guild as IGuild);
@@ -337,6 +373,10 @@ namespace WeX.Modules
         [Command("resume")]
         public async Task Resume()
         {
+            IGuildUser user = (Context.Guild.GetUser(665514955985911818) as IGuildUser);
+            if (user.VoiceChannel is null && link.HasPlayer(Context.Guild as IGuild))
+                await SlientLeft();
+
             try
             {
                 var player = link.GetPlayer(Context.Guild as IGuild);

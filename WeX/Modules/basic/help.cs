@@ -9,10 +9,7 @@ namespace WeX.Modules
     {
         Command[] commands;
 
-        public BasicHelp()
-        {
-            commands = JSONhandler.GetCommands();
-        }
+        public BasicHelp() => commands = JSONhandler.GetCommands();
 
         [Command("help")]
         public async Task Help()

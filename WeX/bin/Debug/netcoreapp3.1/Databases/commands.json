@@ -579,5 +579,69 @@
     "firstusage": "wex clearprefix",
     "secone": "null",
     "secusage": "null"
+  },
+  {
+    "command": "join",
+    "firstone": "Bot will join to channel were are you.",
+    "firstusage": "wex join",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "play",
+    "firstone": "Bot will play music.",
+    "firstusage": "wex play [link]",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "queue",
+    "firstone": "Bot will show current playlist.",
+    "firstusage": "wex queue",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "leave",
+    "firstone": "Bot will leave current channel.",
+    "firstusage": "wex leave",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "stop",
+    "firstone": "Bot will clear queue. Requaries 'Deaf members' permision",
+    "firstusage": "wex stop",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "volume",
+    "firstone": "Bot will change volume of music between 2 and 150 percent. Requaries 'Deaf members' permision",
+    "firstusage": "wex volume",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "skip",
+    "firstone": "Bot will skip song.",
+    "firstusage": "wex skip",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "pause",
+    "firstone": "Bot will be paused.",
+    "firstusage": "wex pause",
+    "secone": "null",
+    "secusage": "null"
+  },
+  {
+    "command": "resume",
+    "firstone": "Bot will be resumed.",
+    "firstusage": "wex resume",
+    "secone": "null",
+    "secusage": "null"
   }
+
 ]

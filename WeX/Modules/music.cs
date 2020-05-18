@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Discord;
 using Victoria.Enums;
 using Discord.WebSocket;
-using System.Diagnostics.Contracts;
 
 namespace WeX.Modules
 {
@@ -17,16 +16,26 @@ namespace WeX.Modules
 
         public async Task SlientLeft()
         {
-            var player = link.GetPlayer(Context.Guild as IGuild);
-            await link.LeaveAsync(player.VoiceChannel);
-            await player.StopAsync();
+            try
+            {
+                var player = link.GetPlayer(Context.Guild as IGuild);
+                await link.LeaveAsync(player.VoiceChannel);
+                if (player.StopAsync() == null)
+                    throw new Exception("DUPE KURWA");
+            }
+            catch(Exception)
+            {
+
+            }
         }
 
         [Command("join")]
+        [RequireBotPermission(GuildPermission.Connect)]
         public async Task Join()
         {
             IGuildUser user = (Context.Guild.GetUser(665514955985911818) as IGuildUser);
-            if (user.VoiceChannel is null && link.HasPlayer(Context.Guild as IGuild))
+
+            if (user.VoiceChannel == null)
                 await SlientLeft();
 
             if (link.HasPlayer(Context.Guild as IGuild))
@@ -55,14 +64,21 @@ namespace WeX.Modules
         }
 
         [Command("leave")]
+        [RequireBotPermission(GuildPermission.Connect)]
         public async Task Leave()
         {
             IGuildUser user = (Context.Guild.GetUser(665514955985911818) as IGuildUser);
-            if (user.VoiceChannel is null && link.HasPlayer(Context.Guild as IGuild))
+            if (user.VoiceChannel == null)
                 await SlientLeft();
 
             try
             {
+                if(user.VoiceChannel is null)
+                {
+                    await ReplyAsync("But I'm not in any channel!"); 
+                    return;
+                }
+
                 var player = link.GetPlayer(Context.Guild as IGuild);
                 await link.LeaveAsync(player.VoiceChannel);
 
@@ -79,6 +95,7 @@ namespace WeX.Modules
         }
 
         [Command("play")]
+        [RequireBotPermission(GuildPermission.Connect)]
         public async Task Play([Remainder]string music)
         {
             IGuildUser user = (Context.Guild.GetUser(665514955985911818) as IGuildUser);
@@ -105,7 +122,7 @@ namespace WeX.Modules
                 var player = link.GetPlayer(Context.Guild as IGuild);
 
                 LavaTrack track;
-                var search = await link.SearchAsync(music);
+                var search = await link.SearchYouTubeAsync(music);
 
                 if (search.LoadStatus == LoadStatus.NoMatches)
                 {
@@ -141,6 +158,7 @@ namespace WeX.Modules
         }
 
         [Command("queue")]
+        [RequireBotPermission(GuildPermission.Connect)]
         public async Task Queue()
         {
             IGuildUser user = (Context.Guild.GetUser(665514955985911818) as IGuildUser);
@@ -205,6 +223,7 @@ namespace WeX.Modules
         }
 
         [Command("skip")]
+        [RequireBotPermission(GuildPermission.Connect)]
         public async Task Skip()
         {
             IGuildUser user = (Context.Guild.GetUser(665514955985911818) as IGuildUser);
@@ -215,7 +234,7 @@ namespace WeX.Modules
             {
                 var player = link.GetPlayer(Context.Guild as IGuild);
 
-                if(player.PlayerState == PlayerState.Disconnected)
+                if(player.PlayerState == PlayerState.Disconnected || player.Queue.Count == 0)
                 {
                     await ReplyAsync("Queue is clear, there is nothing to skip");
                     return;
@@ -228,12 +247,6 @@ namespace WeX.Modules
                 }
 
                 if (player.Queue.Count < 1)
-                {
-                    await ReplyAsync("Queue is clear, there is nothing to skip");
-                    return;
-                }
-
-                if (player.Queue.Count < 2)
                 {
                     var currentTrack = player.Track;
                     await ReplyAsync($"I have successfully skiped {currentTrack.Title}");
@@ -271,6 +284,7 @@ namespace WeX.Modules
 
         [Command("volume")]
         [RequireUserPermission(GuildPermission.DeafenMembers)]
+        [RequireBotPermission(GuildPermission.Connect)]
         public async Task Volume(int volume)
         {
             if ((volume > 150 || volume <= 0) && Context.User.Id != 273438920870461441)
@@ -301,6 +315,7 @@ namespace WeX.Modules
 
         [Command("stop")]
         [RequireUserPermission(GuildPermission.DeafenMembers)]
+        [RequireBotPermission(GuildPermission.Connect)]
         public async Task Stop()
         {
             IGuildUser user = (Context.Guild.GetUser(665514955985911818) as IGuildUser);
@@ -337,6 +352,7 @@ namespace WeX.Modules
         }
 
         [Command("pause")]
+        [RequireBotPermission(GuildPermission.Connect)]
         public async Task Pause()
         {
             IGuildUser user = (Context.Guild.GetUser(665514955985911818) as IGuildUser);
@@ -371,6 +387,7 @@ namespace WeX.Modules
         }
 
         [Command("resume")]
+        [RequireBotPermission(GuildPermission.Connect)]
         public async Task Resume()
         {
             IGuildUser user = (Context.Guild.GetUser(665514955985911818) as IGuildUser);

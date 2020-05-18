@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AnimatedGif;
+﻿using AnimatedGif;
 using System.Drawing;
 
 namespace Gifs

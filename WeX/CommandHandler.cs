@@ -53,10 +53,10 @@ namespace WeX
         }
 
         public async Task TrackEnded(TrackEndedEventArgs args)
-        {
+        { 
             if (!args.Reason.ShouldPlayNext())
                 return;
-
+                            
             if (!args.Player.Queue.TryDequeue(out var queueable))
                 return;
 

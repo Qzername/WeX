@@ -5,7 +5,6 @@ using Discord.WebSocket;
 using Discord.Commands;
 using Database;
 using System.Linq;
-using Victoria;
 
 namespace WeX
 {
@@ -60,9 +59,11 @@ namespace WeX
             if (message.Author.Id == _client.CurrentUser.Id)
                 return;
 
-                if (message.Content == "wex sex")
+            if (message.Content == "wex sex")
                 await message.Channel.SendMessageAsync("That's not funny");
             else if (message.Content == "wex cringe")
+                await message.Channel.SendMessageAsync("no u");
+            else if (message.Content == "status")
                 await message.Channel.SendMessageAsync("no u");
         }
 

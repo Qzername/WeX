@@ -1,6 +1,7 @@
 ﻿using Discord.Commands;
 using Discord;
 using System.Threading.Tasks;
+using Discord.WebSocket;
 
 namespace WeX.Modules
 {
@@ -9,7 +10,7 @@ namespace WeX.Modules
         [Command("ping")]
         public async Task Ping()
         {
-            await Context.Channel.SendMessageAsync("Pong!");
+            await Context.Channel.SendMessageAsync("Pong! Latency: " + Context.Client.Latency);
         }
 
         [Command("info")]
@@ -26,6 +27,28 @@ namespace WeX.Modules
                 .WithFooter("Bot version: 0.4v");
 
             await Context.Channel.SendMessageAsync("", false, bud.Build());
+        }
+
+        [Command("wexstatus")]
+        public async Task WexStatus()
+        {
+            if (Context.User.Id != 273438920870461441)
+                return;
+
+            var embed = new EmbedBuilder();
+
+            int people = 0;
+
+            foreach(SocketGuild x in Context.Client.Guilds)
+                people += x.Users.Count;
+
+            embed.WithTitle("Wex is current status")
+                .AddField("Servers:", Context.Client.Guilds.Count)
+                .AddField("Users:", people)
+                .AddField("Latency:",Context.Client.Latency);
+
+
+            await ReplyAsync(embed: embed.Build());
         }
     }
 }

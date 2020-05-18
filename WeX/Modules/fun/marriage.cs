@@ -164,7 +164,7 @@ namespace WeX.Modules
 
             if(item.user2id == 0)
             {
-                await Context.Channel.SendMessageAsync("You haven't marriage yet...");
+                await Context.Channel.SendMessageAsync("You are not married yet...");
                 return;
             }
 

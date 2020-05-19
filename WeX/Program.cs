@@ -85,7 +85,7 @@ namespace WeX
 
             MainConfig main = SQLiteHandler.GetMessage(user.Guild.Id);
 
-            if (user.Guild.Id == 0)
+            if (user.Guild.Id == 0 || main.autoroleid == 0)
                 return;
 
             if( user.Guild.GetRole(main.autoroleid) == null)

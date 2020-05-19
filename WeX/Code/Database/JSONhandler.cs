@@ -54,7 +54,6 @@ namespace Database
             return null;
         }
 
-        //Czytanie pliku. Najlepiej nie dotykać bez uzera :p
         static string GetFile(JsonFile file)
         {
             string text = string.Empty;

@@ -489,13 +489,7 @@ namespace WeX.Modules
 
             MainConfig config = SQLiteHandler.GetMessage(Context.Guild.Id);
 
-            if(config.autoroleid == 0)
-            {
-                await Context.Channel.SendMessageAsync("Role is not set. Please set it using 'wex autorole [role]` command");
-                return;
-            }
-
-            if(Context.Guild.GetRole(config.autoroleid) == null)
+            if(config.autoroleid == 0 || Context.Guild.GetRole(config.autoroleid) == null)
             {
                 await Context.Channel.SendMessageAsync("Role is not set. Please set it using 'wex autorole [role]` command");
                 return;

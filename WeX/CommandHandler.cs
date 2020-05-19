@@ -108,7 +108,7 @@ namespace WeX
                     else if(result.Error == CommandError.UnmetPrecondition)
                         await context.Channel.SendMessageAsync("You (or I) do not have permission to be able to do this command");
                     else if(result.Error == CommandError.ObjectNotFound)
-                        await context.Channel.SendMessageAsync("User not found");
+                        await context.Channel.SendMessageAsync("User/Role not found");
                     else
                         await context.Channel.SendMessageAsync("Something went wrong.");
                 }

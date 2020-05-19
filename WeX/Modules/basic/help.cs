@@ -18,7 +18,7 @@ namespace WeX.Modules
 
             commands.WithTitle("Available commands on WeX")
                 .WithDescription("Use 'wex help [command]' to know more about command.")
-                .AddField("Basic:", "help, info, ping")
+                .AddField("Basic:", "help, info, ping, invite")
                 .AddField("Fun:", "say, dice, 8ball, computer, toilet, cat, dog, bird, rps, lenny, spoiler, emojileters, hug, lovemeter, drake, pickle, food, reverse, coinflip, random, meme, fox, howgay, choose, joke, keanu, tobecontinued, washer, animalfact, cookie, f, pat, kiss, wasted, potato, howhorny, pixel, slap, howsimp, wink, marriage, care, shibe, russianroulette, joke")
                 .AddField("Utilites:", "add, minus, multiply, devide, root, square, power, min, max, avg, avatar, idinfo, mal, anime, crypt base64, replace, serverstats")
                 .AddField("Moderation:", "clear, kick, ban, softban, hackban, welcomemessage, byemessage, mute, unmute, setmute, autorole, autoroleclear, prefix, clearprefix")

@@ -13,6 +13,12 @@ namespace WeX.Modules
             await Context.Channel.SendMessageAsync("Pong! Latency: " + Context.Client.Latency);
         }
 
+        [Command("invite")]
+        public async Task Invite()
+        {
+            await ReplyAsync("Here is my invite: https://discord.com/api/oauth2/authorize?client_id=665514955985911818&permissions=8&scope=bot");
+        }
+
         [Command("info")]
         public async Task Info()
         {
@@ -23,8 +29,9 @@ namespace WeX.Modules
                 .WithDescription("If you want contact with me in order to suggest new commands or troubleshooting here is info:")
                 .AddField("Author: ", "Uzer#9084")
                 .AddField("Special thanks: ", "Blasstah#5656")
-                .AddField("Oficial Discord:", "https://discord.gg/jYhuRJC")
-                .WithFooter("Bot version: 0.4v");
+                .AddField("Oficial Discord:", "https://discord.gg/sWzvgZB")
+                .WithFooter("Bot version: 0.4v")
+                .WithColor(Color.Green);
 
             await Context.Channel.SendMessageAsync("", false, bud.Build());
         }
@@ -46,7 +53,6 @@ namespace WeX.Modules
                 .AddField("Servers:", Context.Client.Guilds.Count)
                 .AddField("Users:", people)
                 .AddField("Latency:",Context.Client.Latency);
-
 
             await ReplyAsync(embed: embed.Build());
         }

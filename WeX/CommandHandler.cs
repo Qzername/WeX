@@ -110,7 +110,7 @@ namespace WeX
                     else if(result.Error == CommandError.ObjectNotFound)
                         await context.Channel.SendMessageAsync("User not found");
                     else
-                        await context.Channel.SendMessageAsync(result.ErrorReason +  result.Error.ToString());
+                        await context.Channel.SendMessageAsync("Something went wrong.");
                 }
             }
         }

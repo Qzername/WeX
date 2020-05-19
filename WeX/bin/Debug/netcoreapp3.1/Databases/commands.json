@@ -642,6 +642,12 @@
     "firstusage": "wex resume",
     "secone": "null",
     "secusage": "null"
+  },
+  {
+    "command": "invite",
+    "firstone": "Sends bot invite.",
+    "firstusage": "wex invite",
+    "secone": "null",
+    "secusage": "null"
   }
-
 ]

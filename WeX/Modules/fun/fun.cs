@@ -73,9 +73,14 @@ namespace WeX.Modules
             HttpClient client = new HttpClient();
             var json = client.GetStringAsync("https://api.thecatapi.com/v1/images/search");
             Cat[] x = JsonConvert.DeserializeObject<Cat[]>(json.Result);
-            System.Drawing.Image img = HTTPrequest.RequestImage(x[0].url);
-            img.Save("./Images/final.png");
-            await Context.Channel.SendFileAsync("./Images/final.png");
+
+            var embed = new EmbedBuilder();
+
+            embed.WithTitle("CAAAATS!!!")
+                .WithImageUrl(x[0].url)
+                .WithColor(Discord.Color.Purple);
+
+            await ReplyAsync(embed: embed.Build());
         }
 
         [Command("dog")]
@@ -84,9 +89,13 @@ namespace WeX.Modules
             HttpClient client = new HttpClient();
             var json = client.GetStringAsync("https://dog.ceo/api/breeds/image/random");
             Dog x = JsonConvert.DeserializeObject<Dog>(json.Result);
-            System.Drawing.Image img = HTTPrequest.RequestImage(x.message);
-            img.Save("./Images/final.png");
-            await Context.Channel.SendFileAsync("./Images/final.png");
+            var embed = new EmbedBuilder();
+
+            embed.WithTitle("DOOOGS!!!")
+                .WithImageUrl(x.message)
+                .WithColor(Discord.Color.Purple);
+
+            await ReplyAsync(embed: embed.Build());
         }
 
         [Command("hug")]
@@ -125,9 +134,13 @@ namespace WeX.Modules
             HttpClient client = new HttpClient();
             var json = client.GetStringAsync("https://some-random-api.ml/img/birb");
             Bird x = JsonConvert.DeserializeObject<Bird>(json.Result);
-            System.Drawing.Image img = HTTPrequest.RequestImage(x.link);
-            img.Save("./Images/final.png");
-            await Context.Channel.SendFileAsync("./Images/final.png");
+            var embed = new EmbedBuilder();
+
+            embed.WithTitle("BIRDSSS!!!")
+                .WithImageUrl(x.link)
+                .WithColor(Discord.Color.Purple);
+
+            await ReplyAsync(embed: embed.Build());
         }
 
         [Command("rps")]
@@ -138,7 +151,7 @@ namespace WeX.Modules
             Random x = new Random();
             int botchoice = x.Next(1, 4);
 
-            if (choice == "scissors")
+            if (choice.ToLower() == "scissors")
             {
                 if (botchoice == 1)
                     await Context.Channel.SendMessageAsync("I choose... Scissors! Draw!");
@@ -147,7 +160,7 @@ namespace WeX.Modules
                 else
                     await Context.Channel.SendMessageAsync("I choose... Paper! You won!");
             }
-            else if (choice == "rock")
+            else if (choice.ToLower() == "rock")
             {
                 if (botchoice == 1)
                     await Context.Channel.SendMessageAsync("I choose... Scissors! You won!");
@@ -156,7 +169,7 @@ namespace WeX.Modules
                 else
                     await Context.Channel.SendMessageAsync("I choose... Paper! I won!");
             }
-            else if (choice == "paper")
+            else if (choice.ToLower() == "paper")
             {
                 if (botchoice == 1)
                     await Context.Channel.SendMessageAsync("I choose... Scissors! I won!");
@@ -193,6 +206,12 @@ namespace WeX.Modules
         [Command("spoiler")]
         public async Task Spoiler([Remainder]string text)
         {
+            if(text.Length > 100)
+            {
+                ReplyAsync("Text is too long!");
+                return;
+            }
+
             char[] textbutchar = text.ToCharArray();
             string final = string.Empty;
 
@@ -207,6 +226,12 @@ namespace WeX.Modules
         {
             char[] x = text.ToLower().ToCharArray();
             string final = string.Empty;
+
+            if(text.Length > 50)
+            {
+                await ReplyAsync("Text can't be longer than 50 characters");
+                return;
+            }
 
             foreach (char y in x)
             {
@@ -370,9 +395,13 @@ namespace WeX.Modules
             var jsonstring = client.GetStringAsync("https://api.spoonacular.com/recipes/random?apiKey=e36467522cb742619b0fa63942e25bfd");
             JObject json = JObject.Parse(jsonstring.Result);
             Food x = JsonConvert.DeserializeObject<Food>(json["recipes"][0].ToString());
-            System.Drawing.Image img = HTTPrequest.RequestImage(x.image);
-            img.Save("./Images/final.png");
-            await Context.Channel.SendFileAsync("./Images/final.png");
+            var embed = new EmbedBuilder();
+
+            embed.WithTitle("FOOOOD!")
+                .WithImageUrl(x.image)
+                .WithColor(Discord.Color.Purple);
+
+            await ReplyAsync(embed: embed.Build());
         }
 
         [Command("joker")]
@@ -422,8 +451,11 @@ namespace WeX.Modules
         }
 
         [Command("howsimp")]
-        public async Task HowSimp(IGuildUser user)
+        public async Task HowSimp(IGuildUser user = null)
         {
+            if (user == null)
+                user = (IGuildUser)Context.User;
+
             if (SQLiteHandler.Marriage.NoInMarriage(Context.Guild.Id, Context.User.Id))
                 SQLiteHandler.Marriage.NewPerson(Context.Guild.Id, Context.User.Id);
 
@@ -463,8 +495,11 @@ namespace WeX.Modules
         }
 
         [Command("howweeb")]
-        public async Task HowWeeb(IGuildUser user)
+        public async Task HowWeeb(IGuildUser user = null)
         {
+            if (user == null)
+                user = (IGuildUser)Context.User;
+
             var plainTextBytes = Encoding.UTF8.GetBytes(user.ToString());
             string converted = Convert.ToBase64String(plainTextBytes);
             byte[] LogoDataBy = Encoding.ASCII.GetBytes(converted);
@@ -493,8 +528,11 @@ namespace WeX.Modules
         }
 
         [Command("howgay")]
-        public async Task HowGay(IGuildUser user)
+        public async Task HowGay(IGuildUser user = null)
         {
+            if (user == null)
+                user = (IGuildUser)Context.User;
+
             var plainTextBytes = Encoding.UTF8.GetBytes(user.ToString());
             string converted = Convert.ToBase64String(plainTextBytes);
             byte[] LogoDataBy = Encoding.ASCII.GetBytes(converted);
@@ -513,9 +551,13 @@ namespace WeX.Modules
             HttpClient client = new HttpClient();
             var json = client.GetStringAsync("https://some-random-api.ml/img/fox");
             Bird x = JsonConvert.DeserializeObject<Bird>(json.Result);
-            System.Drawing.Image img = HTTPrequest.RequestImage(x.link);
-            img.Save("./Images/final.png");
-            await Context.Channel.SendFileAsync("./Images/final.png");
+            var embed = new EmbedBuilder();
+
+            embed.WithTitle("FOOOXEEES!!!")
+                .WithImageUrl(x.link)
+                .WithColor(Discord.Color.Purple);
+
+            await ReplyAsync(embed: embed.Build());
         }
 
         [Command("meme")]
@@ -524,9 +566,14 @@ namespace WeX.Modules
             HttpClient client = new HttpClient();
             var json = client.GetStringAsync("https://some-random-api.ml/meme");
             Meme x = JsonConvert.DeserializeObject<Meme>(json.Result);
-            System.Drawing.Image img = HTTPrequest.RequestImage(x.image);
-            img.Save("./Images/final.png");
-            await Context.Channel.SendFileAsync("./Images/final.png");
+
+            var embed = new EmbedBuilder();
+
+            embed.WithTitle(x.caption)
+                .WithImageUrl(x.image)
+                .WithColor(Discord.Color.Purple);
+
+            await ReplyAsync(embed: embed.Build());
         }
 
         [Command("random")]
@@ -537,7 +584,7 @@ namespace WeX.Modules
             try
             {
                 min = Convert.ToInt32(smin);
-                max = Convert.ToInt32(smax);
+                max = Convert.ToInt32(smax) + 1;
             }
             catch (Exception)
             {
@@ -679,7 +726,38 @@ namespace WeX.Modules
             await Context.Channel.SendMessageAsync("", false, build.Build());
         }
 
-        [Command("Wink")]
+        [Command("bite")]
+        public async Task Bite(IGuildUser user)
+        {
+            Bird[] final = (Bird[])JSONhandler.GetElement(JsonFile.bite);
+
+            if (user.Id == Context.User.Id)
+            {
+                await Context.Channel.SendMessageAsync("You can't bite yourself! That hurts!");
+                return;
+            }
+            else if (user.Id == 665514955985911818)
+            {
+                await Context.Channel.SendMessageAsync("Don't bite me you monster!!");
+                return;
+            }
+            else if (user.IsBot == true)
+            {
+                await Context.Channel.SendMessageAsync("You can't bite bot!");
+                return;
+            }
+
+            EmbedBuilder build = new EmbedBuilder();
+            Random rand = new Random();
+            int choose = rand.Next(1, final.Length);
+
+            build.WithTitle(Context.User.ToString() + " is biting " + user.ToString() + "!")
+                        .WithImageUrl(final[choose].link);
+
+            await Context.Channel.SendMessageAsync("", false, build.Build());
+        }
+
+        [Command("wink")]
         public async Task Wink()
         {
             HttpClient client = new HttpClient();
@@ -828,15 +906,79 @@ namespace WeX.Modules
             await Context.Channel.SendMessageAsync(user.Mention + " is horny in " + x.Next(1, 101) + "%");
         }
 
+        [Command("howslav")]
+        public async Task HowSlav(IGuildUser user = null)
+        {
+            if (user == null)
+                user = (IGuildUser)Context.User;
+
+            var plainTextBytes = Encoding.UTF8.GetBytes(user.ToString());
+            string converted = Convert.ToBase64String(plainTextBytes);
+            byte[] LogoDataBy = Encoding.ASCII.GetBytes(converted);
+            int seed = 10;
+            foreach (byte byt in LogoDataBy)
+                seed += byt * 7;
+
+            Random x = new Random(seed);
+
+            await Context.Channel.SendMessageAsync(user.Mention + " is slav in " + x.Next(1, 101) + "%");
+        }
+
+        [Command("howfat")]
+        public async Task HowFat(IGuildUser user = null)
+        {
+            if (user == null)
+                user = (IGuildUser)Context.User;
+
+            var plainTextBytes = Encoding.UTF8.GetBytes(user.ToString());
+            string converted = Convert.ToBase64String(plainTextBytes);
+            byte[] LogoDataBy = Encoding.ASCII.GetBytes(converted);
+            int seed = 10;
+            foreach (byte byt in LogoDataBy)
+                seed += byt * 7;
+
+            if (user.Id == 285031189956263936)
+            {
+                await ReplyAsync("wyjebalo poza skale");
+                return;
+            }
+
+            Random x = new Random(seed);
+
+            await Context.Channel.SendMessageAsync(user.Mention + " weights " + x.Next(30, 150) + "KG!");
+        }
+
+        [Command("howold")]
+        public async Task HowOld(IGuildUser user = null)
+        {
+            if (user == null)
+                user = (IGuildUser)Context.User;
+
+            var plainTextBytes = Encoding.UTF8.GetBytes(user.ToString());
+            string converted = Convert.ToBase64String(plainTextBytes);
+            byte[] LogoDataBy = Encoding.ASCII.GetBytes(converted);
+            int seed = 10;
+            foreach (byte byt in LogoDataBy)
+                seed += byt * 5;
+
+            Random x = new Random(seed);
+
+            await Context.Channel.SendMessageAsync("The mental age of "+ user.Mention + " is " + x.Next(5, 100) + " years old");
+        }
+
         [Command("shibe")]
         public async Task Shibe()
         {
             HttpClient client = new HttpClient();
             var json = client.GetStringAsync("http://shibe.online/api/shibes?count=1&urls=true");
             string[] x = JsonConvert.DeserializeObject<string[]>(json.Result);
-            System.Drawing.Image img = HTTPrequest.RequestImage(x[0]);
-            img.Save("./Images/final.png");
-            await Context.Channel.SendFileAsync("./Images/final.png");
+            var embed = new EmbedBuilder();
+
+            embed.WithTitle("SHIIIBBEEEE!!!")
+                .WithImageUrl(x[0])
+                .WithColor(Discord.Color.Purple);
+
+            await ReplyAsync(embed: embed.Build());
         }
 
         [Command("russianroulette")]

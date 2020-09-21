@@ -51,7 +51,7 @@ namespace WeX.Modules
                 .AddField("Accept marriage", "marriage accept", true)
                 .AddField("Cancel marriage", "cancel marriage", true)
                 .WithColor(Color.Blue);
-
+ 
             await Context.Channel.SendMessageAsync("", false, embed.Build());
         }
 
@@ -124,7 +124,7 @@ namespace WeX.Modules
                 return;
             }
 
-             MarriageItem marr = SQLiteHandler.Marriage.GetMarriage(Context.Guild.Id, Context.User.Id);
+            MarriageItem marr = SQLiteHandler.Marriage.GetMarriage(Context.Guild.Id, Context.User.Id);
 
             if(marr.user2id != 0)
             {
@@ -132,7 +132,7 @@ namespace WeX.Modules
                 return;
             }
 
-            await ReplyAsync(user.Mention + ", You have 15 secounds from now to say 'wex yes' to accept marriage! *If you don't want to say 'wex no'...* Btw. nobody can't write in this time or It will be canceled");
+            await ReplyAsync(user.Mention + ", You have 15 seconds from now to say 'wex yes' to accept marriage! *If you don't want to say 'wex no'...* Btw. nobody can't write in this time or It will be canceled");
             var response = await NextMessageAsync(false); 
 
             if (response != null)

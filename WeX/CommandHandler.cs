@@ -18,27 +18,22 @@ namespace WeX
         private CommandService _Service;
         private DiscordSocketClient _Client;
         IServiceProvider provider;
-        LavaNode lavanode;
 
         public CommandHandler(DiscordSocketClient Client)
         {
             _Client = Client;
             var services = new ServiceCollection()
                 .AddSingleton(_Client)
-                .AddSingleton<InteractiveService>()
-                .AddSingleton<LavaNode>()
-                .AddSingleton<LavaConfig>();
+                .AddSingleton<InteractiveService>();
 
             provider = services.BuildServiceProvider();
 
-            lavanode = provider.GetRequiredService<LavaNode>();
-
             _Service = new CommandService();
             _Service.AddModulesAsync(Assembly.GetEntryAssembly(), provider);
-            lavanode.OnTrackEnded += TrackEnded;
             _Client.JoinedGuild += JoinGuild;
             _Client.MessageReceived += HandleCommandAsync;
-            _Client.Ready += Ready;
+
+            _Client.SetGameAsync("Use 'wex help'!");
         }
 
         public async Task JoinGuild(SocketGuild guild)
@@ -52,38 +47,6 @@ namespace WeX
             await guild.TextChannels.First().SendMessageAsync(embed: embed.Build());
         }
 
-        public async Task TrackEnded(TrackEndedEventArgs args)
-        { 
-            if (!args.Reason.ShouldPlayNext())
-                return;
-                            
-            if (!args.Player.Queue.TryDequeue(out var queueable))
-                return;
-
-            if (!(queueable is LavaTrack track))
-            {
-                await args.Player.TextChannel.SendMessageAsync("Next item in queue is not a track.");
-                return;
-            }
-            await args.Player.PlayAsync(track);
-            await args.Player.TextChannel.SendMessageAsync($"Now Playing[{track.Title}]({track.Url})");
-        }
-
-        async Task Ready()
-        {
-            try
-            {
-                Console.WriteLine("Connecting to LavaLink...");
-                await lavanode.ConnectAsync();
-                await _Client.SetGameAsync("Use 'wex help'!");
-                Console.WriteLine("Connected to LavaLink!");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Source + " " + ex.Message);
-            }
-        }
-
         private async Task HandleCommandAsync(SocketMessage M)
         {
             var Message = M as SocketUserMessage;
@@ -95,8 +58,12 @@ namespace WeX
 
             MainConfig config = SQLiteHandler.GetMessage(context.Guild.Id);
             string prefix = "wex ";
-            if(!(config is null))
+
+            if (!(config is null))
                 prefix = config.prefix;
+
+            if (M.Author.Id == 285031189956263936)
+                M.Channel.SendMessageAsync("ok");
 
             if (Message.HasStringPrefix("wex ", ref argPos) || Message.HasStringPrefix(prefix, ref argPos) || Message.HasMentionPrefix(_Client.CurrentUser, ref argPos))
             {
@@ -111,6 +78,7 @@ namespace WeX
                         await context.Channel.SendMessageAsync("User/Role not found");
                     else
                         await context.Channel.SendMessageAsync("Something went wrong.");
+                        
                 }
             }
         }

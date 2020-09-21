@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "j5LvAUewKd+02pVD7DBqSNvgSjpBbe4TwI1sfXsvcihbNZlpE6nKVKig+Pppo1FUJXlPe0P2RMyDyWrP969cGA==",
+  "dgSpecHash": "gmIXN4XJ0sm32fLUNsFS5o8cPrLb7RNDZlwZMRO839QgfAmUqTzblP2agmeHJESW/na7/NKgfmQpOsya4k6DEw==",
   "success": true,
   "projectFilePath": "D:\\Projekty\\Boty\\WeX\\WeX\\WeX.csproj",
   "expectedPackageFiles": [
@@ -104,7 +104,7 @@
     "C:\\Users\\huber\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512",
     "C:\\Users\\huber\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\huber\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\huber\\.nuget\\packages\\victoria\\5.1.3\\victoria.5.1.3.nupkg.sha512"
+    "C:\\Users\\huber\\.nuget\\packages\\victoria\\5.1.6\\victoria.5.1.6.nupkg.sha512"
   ],
   "logs": [
     {

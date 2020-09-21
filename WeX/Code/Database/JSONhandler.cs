@@ -81,6 +81,7 @@ namespace Database
         EightBall,
         slap,
         kiss,
-        commands
+        commands,
+        bite
     }
 }
